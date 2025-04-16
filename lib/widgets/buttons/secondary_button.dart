@@ -17,6 +17,7 @@ class SecondaryButton extends StatelessWidget {
       padding: const EdgeInsets.all(8.0),
       child: SizedBox(
         width: size.width,
+        height: 52,
         child: ElevatedButton(
           onPressed: onPressed,
           style: ElevatedButton.styleFrom(
