@@ -1,3 +1,4 @@
+import 'package:filme_flix/core/authentication/signup/signup_page.dart';
 import 'package:filme_flix/widgets/buttons/primary_button.dart';
 import 'package:flutter/material.dart';
 
@@ -32,7 +33,6 @@ class LoginData {
   }
 }
 
-
 class _LoginPageState extends State<LoginPage> {
   final _formKey = GlobalKey<FormState>();
   final Map<String, TextEditingController> sigUpController = {
@@ -45,112 +45,124 @@ class _LoginPageState extends State<LoginPage> {
   Widget build(BuildContext context) {
     return Material(
       child: SizedBox(
-        child: Form(
-          key: _formKey,
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: [
-            const Text(
-              'Login',
-              style: TextStyle(
-                fontWeight: FontWeight.bold,
-                fontSize: 24,
+          child: Form(
+        key: _formKey,
+        child: Padding(
+          padding: const EdgeInsets.all(16),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              const Text(
+                'Login',
+                style: TextStyle(
+                  fontWeight: FontWeight.bold,
+                  fontSize: 24,
+                ),
               ),
-            ),
-            const SizedBox(height: 64),
-            TextFormField(
-              controller: sigUpController['email'],
-              validator: (value) {
-                if (value == null || value.isEmpty) {
-                  return 'Please enter a valid email';
-                }
-                return null;
-              },
-              keyboardType: TextInputType.emailAddress,
-              style: const TextStyle(
-                color: Color(0xff32A873),
-              ),
-              decoration: const InputDecoration(
-                prefixIcon: Icon(Icons.email),
-                prefixIconColor: Color(0xff32A873),
-                border: OutlineInputBorder(),
-                labelText: 'Email',
-                hintText: 'Enter your email',
-                hintStyle: TextStyle(
+              const SizedBox(height: 64),
+              TextFormField(
+                controller: sigUpController['email'],
+                validator: (value) {
+                  if (value == null || value.isEmpty) {
+                    return 'Please enter a valid email';
+                  }
+                  return null;
+                },
+                keyboardType: TextInputType.emailAddress,
+                style: const TextStyle(
                   color: Color(0xff32A873),
                 ),
-              ),
-            ),
-            const SizedBox(height: 32),
-            TextFormField(
-              obscureText: _isObscure,
-              controller: sigUpController['password'],
-              validator: (value) {
-                if (value == null || value.isEmpty) {
-                  return 'Please enter a valid password';
-                }
-                return null;
-              },
-              keyboardType: TextInputType.visiblePassword,
-              style: const TextStyle(
-                color: Color(0xff32A873),
-              ),
-              decoration: InputDecoration(
-                prefixIcon: const Icon(Icons.lock),
-                prefixIconColor: const Color(0xff32A873),
-                suffixIcon: IconButton(
-                  icon: Icon(
-                    _isObscure ? Icons.visibility : Icons.visibility_off,
+                decoration: const InputDecoration(
+                  prefixIcon: Icon(Icons.email),
+                  prefixIconColor: Color(0xff32A873),
+                  border: OutlineInputBorder(),
+                  labelText: 'Email',
+                  hintText: 'Enter your email',
+                  hintStyle: TextStyle(
+                    color: Color(0xff32A873),
                   ),
-                  onPressed: () {
-                    setState(() {
-                      _isObscure = !_isObscure;
-                    });
-                  },
                 ),
-                border: const OutlineInputBorder(),
-                labelText: 'Password',
-                hintText: 'Enter your password',
-                hintStyle: const TextStyle(
+              ),
+              const SizedBox(height: 32),
+              TextFormField(
+                obscureText: _isObscure,
+                controller: sigUpController['password'],
+                validator: (value) {
+                  if (value == null || value.isEmpty) {
+                    return 'Please enter a valid password';
+                  }
+                  return null;
+                },
+                keyboardType: TextInputType.visiblePassword,
+                style: const TextStyle(
                   color: Color(0xff32A873),
                 ),
+                decoration: InputDecoration(
+                  prefixIcon: const Icon(Icons.lock),
+                  prefixIconColor: const Color(0xff32A873),
+                  suffixIcon: IconButton(
+                    icon: Icon(
+                      _isObscure ? Icons.visibility : Icons.visibility_off,
+                    ),
+                    onPressed: () {
+                      setState(() {
+                        _isObscure = !_isObscure;
+                      });
+                    },
+                  ),
+                  border: const OutlineInputBorder(),
+                  labelText: 'Password',
+                  hintText: 'Enter your password',
+                  hintStyle: const TextStyle(
+                    color: Color(0xff32A873),
+                  ),
+                ),
               ),
-            ),
-            const SizedBox(height: 24),
-            PrimaryButton(
-              onPressed: () {
-                if (_formKey.currentState!.validate()) {
-                  final data = sigUpController.data();
-                  print(data.email);
-                  print(data.password);
-                }
-              },
-              text: "Login",
-            ),
-            const SizedBox(height: 8),
-            const Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: [
-                Text(
-                  'Haven’t made an account? ',
-                  style: TextStyle(
-                    fontWeight: FontWeight.w400,
-                    fontSize: 13,
+              const SizedBox(height: 24),
+              PrimaryButton(
+                onPressed: () {
+                  if (_formKey.currentState!.validate()) {
+                    final data = sigUpController.toLoginData();
+                    print(data.email);
+                    print(data.password);
+                  }
+                },
+                text: "Login",
+              ),
+              const SizedBox(height: 8),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  const Text(
+                    'Haven’t made an account? ',
+                    style: TextStyle(
+                      fontWeight: FontWeight.w400,
+                      fontSize: 13,
+                    ),
                   ),
-                ),
-                Text(
-                  'Sign Up',
-                  style: TextStyle(
-                    color: Color(0xFF95ACFF),
-                    fontWeight: FontWeight.w400,
-                    fontSize: 13,
+                  GestureDetector(
+                    onTap: () {
+                      Navigator.of(context).push(
+                        MaterialPageRoute(
+                          builder: (context) => const SignUpPage(),
+                        ),
+                      );
+                    },
+                    child: const Text(
+                      'Sign Up',
+                      style: TextStyle(
+                        color: Color(0xFF95ACFF),
+                        fontWeight: FontWeight.w400,
+                        fontSize: 13,
+                      ),
+                    ),
                   ),
-                ),
-              ],
-            ),
-          ],
+                ],
+              ),
+            ],
+          ),
         ),
       )),
     );
@@ -158,7 +170,7 @@ class _LoginPageState extends State<LoginPage> {
 }
 
 extension Data on Map<String, TextEditingController> {
-  LoginData data() {
+  LoginData toLoginData() {
     final map = <String, dynamic>{};
     for (MapEntry e in entries) {
       map.putIfAbsent(e.key, () => e.value.text);
