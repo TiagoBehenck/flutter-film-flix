@@ -41,7 +41,6 @@ class BannerMovieError extends StatelessWidget {
                 ),
               ),
               const SizedBox(height: 24),
-              // Texto principal em inglês
               Text(
                 'Oops! Unable to load image',
                 textAlign: TextAlign.center,
@@ -52,7 +51,6 @@ class BannerMovieError extends StatelessWidget {
                 ),
               ),
               const SizedBox(height: 12),
-              // Subtexto em inglês
               Text(
                 'This could be due to a temporary connection issue or the image may no longer be available.',
                 textAlign: TextAlign.center,
@@ -62,7 +60,6 @@ class BannerMovieError extends StatelessWidget {
                 ),
               ),
               const SizedBox(height: 24),
-              // Botão de retry com texto em inglês
               ElevatedButton.icon(
                 onPressed: onRetry,
                 icon: const Icon(Icons.refresh_rounded),
