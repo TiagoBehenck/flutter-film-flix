@@ -1,4 +1,5 @@
 import 'package:filme_flix/core/authentication/login/view/login_page.dart';
+import 'package:filme_flix/core/authentication/signup/signup_page.dart';
 import 'package:filme_flix/widgets/buttons/primary_button.dart';
 import 'package:filme_flix/widgets/buttons/secondary_button.dart';
 import 'package:flutter/material.dart';
@@ -59,7 +60,13 @@ class LandingPage extends StatelessWidget {
                   text: "Login",
                 ),
                 SecondaryButton(
-                  onPressed: () {},
+                  onPressed: () {
+                    Navigator.of(context).push(
+                        MaterialPageRoute(
+                          builder: (context) => const SignUpPage(),
+                        ),
+                      );
+                  },
                   text: "Sign Up",
                 )
               ],
