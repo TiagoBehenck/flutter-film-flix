@@ -1,3 +1,4 @@
+import 'package:filme_flix/core/app/home/view/home_page.dart';
 import 'package:filme_flix/core/authentication/signup/signup_page.dart';
 import 'package:filme_flix/widgets/buttons/primary_button.dart';
 import 'package:flutter/material.dart';
@@ -123,9 +124,11 @@ class _LoginPageState extends State<LoginPage> {
               PrimaryButton(
                 onPressed: () {
                   if (_formKey.currentState!.validate()) {
-                    final data = sigUpController.toLoginData();
-                    print(data.email);
-                    print(data.password);
+                    Navigator.of(context).push(
+                      MaterialPageRoute(
+                        builder: (context) => const HomePage(),
+                      ),
+                    );
                   }
                 },
                 text: "Login",
