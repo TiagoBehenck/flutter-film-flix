@@ -1,7 +1,7 @@
-import 'package:filme_flix/core/app/home/view/home_page.dart';
-import 'package:filme_flix/core/authentication/signup/signup_page.dart';
+import 'package:filme_flix/core/navigation/routes_constants.dart';
 import 'package:filme_flix/widgets/buttons/primary_button.dart';
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({super.key});
@@ -124,11 +124,7 @@ class _LoginPageState extends State<LoginPage> {
               PrimaryButton(
                 onPressed: () {
                   if (_formKey.currentState!.validate()) {
-                    Navigator.of(context).push(
-                      MaterialPageRoute(
-                        builder: (context) => const HomePage(),
-                      ),
-                    );
+                    context.go(RoutesConstants.home);
                   }
                 },
                 text: "Login",
@@ -146,13 +142,7 @@ class _LoginPageState extends State<LoginPage> {
                     ),
                   ),
                   GestureDetector(
-                    onTap: () {
-                      Navigator.of(context).push(
-                        MaterialPageRoute(
-                          builder: (context) => const SignUpPage(),
-                        ),
-                      );
-                    },
+                    onTap: () => context.push(RoutesConstants.signup),
                     child: const Text(
                       'Sign Up',
                       style: TextStyle(
@@ -175,9 +165,11 @@ class _LoginPageState extends State<LoginPage> {
 extension Data on Map<String, TextEditingController> {
   LoginData toLoginData() {
     final map = <String, dynamic>{};
+    
     for (MapEntry e in entries) {
       map.putIfAbsent(e.key, () => e.value.text);
     }
+    
     return LoginData.fromMap(map);
   }
 }
