@@ -1,3 +1,4 @@
+import 'package:filme_flix/common/extensions/build_context_extension.dart';
 import 'package:filme_flix/core/authentication/login/view/login_page.dart';
 import 'package:filme_flix/core/authentication/signup/signup_page.dart';
 import 'package:filme_flix/widgets/buttons/primary_button.dart';
@@ -9,7 +10,6 @@ class LandingPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final size = MediaQuery.of(context).size;
     return Material(
       child: Stack(
         alignment: Alignment.bottomCenter,
@@ -21,8 +21,8 @@ class LandingPage extends StatelessWidget {
             ),
           ),
           Container(
-            height: size.height * .33,
-            width: size.width,
+            height: context.height * .33,
+            width: context.width,
             padding: const EdgeInsets.symmetric(vertical: 29, horizontal: 19),
             decoration: BoxDecoration(
               color: Colors.black.withOpacity(.9),

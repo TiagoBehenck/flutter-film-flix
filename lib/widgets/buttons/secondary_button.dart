@@ -1,3 +1,4 @@
+import 'package:filme_flix/common/extensions/build_context_extension.dart';
 import 'package:flutter/material.dart';
 
 class SecondaryButton extends StatelessWidget {
@@ -11,12 +12,10 @@ class SecondaryButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final size = MediaQuery.of(context).size;
-
     return Padding(
       padding: const EdgeInsets.all(8.0),
       child: SizedBox(
-        width: size.width,
+        width: context.width,
         height: 52,
         child: ElevatedButton(
           onPressed: onPressed,
