@@ -1,3 +1,4 @@
+import 'package:filme_flix/common/extensions/build_context_extension.dart';
 import 'package:filme_flix/widgets/banner_movie/banner_movie_error.dart';
 import 'package:flutter/material.dart';
 
@@ -10,10 +11,8 @@ class BannerMovie extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final screenHeight = MediaQuery.of(context).size.height;
-
     return SizedBox(
-      height: screenHeight * 0.6,
+      height: context.height * 0.6,
       width: double.infinity,
       child: Image.network(
         src,
