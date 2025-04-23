@@ -1,6 +1,7 @@
-import 'package:filme_flix/core/authentication/login/view/login_page.dart';
+import 'package:filme_flix/core/navigation/routes_constants.dart';
 import 'package:filme_flix/widgets/buttons/primary_button.dart';
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 
 class SignUpPage extends StatefulWidget {
   const SignUpPage({super.key});
@@ -152,9 +153,7 @@ class _SignUpPageState extends State<SignUpPage> {
               PrimaryButton(
                 onPressed: () {
                   if (_formKey.currentState!.validate()) {
-                    final data = sigUpController.data();
-                    print(data.email);
-                    print(data.password);
+                    context.push(RoutesConstants.home);
                   }
                 },
                 text: "Login",
@@ -172,13 +171,7 @@ class _SignUpPageState extends State<SignUpPage> {
                     ),
                   ),
                   GestureDetector(
-                    onTap: () {
-                      Navigator.of(context).push(
-                        MaterialPageRoute(
-                          builder: (context) => const LoginPage(),
-                        ),
-                      );
-                    },
+                    onTap: () => context.push(RoutesConstants.login),
                     child: const Text(
                       'Login',
                       style: TextStyle(

@@ -1,0 +1,65 @@
+import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
+
+class NavBar extends StatefulWidget {
+  const NavBar({required this.child, required this.index, super.key});
+  final Widget child;
+  final int index;
+
+  @override
+  State<NavBar> createState() => _NavBarState();
+}
+
+class _NavBarState extends State<NavBar> {
+  // TODO: Add a list of routes to the tabs
+  final List<String> _tabs = [
+    '/home',
+    '/search',
+    '/favorites',
+    '/settings',
+  ];
+
+  void changePage(int index) {
+    final route = _tabs[index];
+
+    if (!context.mounted) return;
+
+    context.go(route, extra: index);
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      body: SafeArea(child: widget.child),
+      bottomNavigationBar: Container(
+        padding: const EdgeInsets.only(top: 6),
+        child: BottomNavigationBar(
+          type: BottomNavigationBarType.fixed,
+          currentIndex: widget.index,
+          onTap: (value) => changePage(value),
+          selectedItemColor: const Color(0xff32A873),
+          unselectedItemColor: const Color(0xffBBBBBB),
+          backgroundColor: Theme.of(context).colorScheme.onPrimary,
+          items: const [
+            BottomNavigationBarItem(
+              icon: Icon(Icons.home),
+              label: 'Home',
+            ),
+            BottomNavigationBarItem(
+              icon: Icon(Icons.search),
+              label: 'Search',
+            ),
+            BottomNavigationBarItem(
+              icon: Icon(Icons.favorite),
+              label: 'Favorites',
+            ),
+            BottomNavigationBarItem(
+              icon: Icon(Icons.settings),
+              label: 'Settings',
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+}
