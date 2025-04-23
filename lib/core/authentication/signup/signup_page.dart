@@ -37,7 +37,6 @@ class LoginData {
   }
 }
 
-
 class _SignUpPageState extends State<SignUpPage> {
   final _formKey = GlobalKey<FormState>();
   final Map<String, TextEditingController> sigUpController = {
@@ -51,8 +50,8 @@ class _SignUpPageState extends State<SignUpPage> {
   Widget build(BuildContext context) {
     return Material(
       child: SizedBox(
-        child: Form(
-          key: _formKey,
+          child: Form(
+        key: _formKey,
         child: Padding(
           padding: const EdgeInsets.all(16),
           child: Column(
@@ -76,17 +75,17 @@ class _SignUpPageState extends State<SignUpPage> {
                   return null;
                 },
                 keyboardType: TextInputType.emailAddress,
-                style: const TextStyle(
-                  color: Color(0xff32A873),
+                style: TextStyle(
+                  color: Theme.of(context).colorScheme.primary,
                 ),
-                decoration: const InputDecoration(
-                  prefixIcon: Icon(Icons.email),
-                  prefixIconColor: Color(0xff32A873),
-                  border: OutlineInputBorder(),
+                decoration: InputDecoration(
+                  prefixIcon: const Icon(Icons.email),
+                  prefixIconColor: Theme.of(context).colorScheme.primary,
+                  border: const OutlineInputBorder(),
                   labelText: 'Email',
                   hintText: 'Enter your email',
                   hintStyle: TextStyle(
-                    color: Color(0xff32A873),
+                    color: Theme.of(context).colorScheme.primary,
                   ),
                 ),
               ),
@@ -100,17 +99,17 @@ class _SignUpPageState extends State<SignUpPage> {
                   return null;
                 },
                 keyboardType: TextInputType.name,
-                style: const TextStyle(
-                  color: Color(0xff32A873),
+                style: TextStyle(
+                  color: Theme.of(context).colorScheme.primary,
                 ),
-                decoration: const InputDecoration(
-                  prefixIcon: Icon(Icons.person),
-                  prefixIconColor: Color(0xff32A873),
-                  border: OutlineInputBorder(),
+                decoration: InputDecoration(
+                  prefixIcon: const Icon(Icons.person),
+                  prefixIconColor: Theme.of(context).colorScheme.primary,
+                  border: const OutlineInputBorder(),
                   labelText: 'Username',
                   hintText: 'Enter your username',
                   hintStyle: TextStyle(
-                    color: Color(0xff32A873),
+                    color: Theme.of(context).colorScheme.primary,
                   ),
                 ),
               ),
@@ -125,12 +124,12 @@ class _SignUpPageState extends State<SignUpPage> {
                   return null;
                 },
                 keyboardType: TextInputType.visiblePassword,
-                style: const TextStyle(
-                  color: Color(0xff32A873),
+                style: TextStyle(
+                  color: Theme.of(context).colorScheme.primary,
                 ),
                 decoration: InputDecoration(
                   prefixIcon: const Icon(Icons.lock),
-                  prefixIconColor: const Color(0xff32A873),
+                  prefixIconColor: Theme.of(context).colorScheme.primary,
                   suffixIcon: IconButton(
                     icon: Icon(
                       _isObscure ? Icons.visibility : Icons.visibility_off,
@@ -144,8 +143,8 @@ class _SignUpPageState extends State<SignUpPage> {
                   border: const OutlineInputBorder(),
                   labelText: 'Password',
                   hintText: 'Enter your password',
-                  hintStyle: const TextStyle(
-                    color: Color(0xff32A873),
+                  hintStyle: TextStyle(
+                    color: Theme.of(context).colorScheme.primary,
                   ),
                 ),
               ),

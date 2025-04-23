@@ -1,43 +1,37 @@
+import 'package:filme_flix/common/extensions/build_context_extension.dart';
 import 'package:flutter/material.dart';
 
 class SecondaryButton extends StatelessWidget {
   final void Function()? onPressed;
   final String text;
-  const SecondaryButton({
-    super.key,
-    required this.onPressed,
-    required this.text
-  });
+  const SecondaryButton(
+      {super.key, required this.onPressed, required this.text});
 
   @override
   Widget build(BuildContext context) {
-    final size = MediaQuery.of(context).size;
-
     return Padding(
       padding: const EdgeInsets.all(8.0),
       child: SizedBox(
-        width: size.width,
+        width: context.width,
         height: 52,
         child: ElevatedButton(
           onPressed: onPressed,
           style: ElevatedButton.styleFrom(
-            shape: const RoundedRectangleBorder(
-              side: BorderSide(
-                color: Color(0xff32A873)
-              ),
-              borderRadius: BorderRadius.all(Radius.circular(4)),
+            shape: RoundedRectangleBorder(
+              side: BorderSide(color: Theme.of(context).colorScheme.primary),
+              borderRadius: const BorderRadius.all(Radius.circular(4)),
             ),
             backgroundColor: Colors.transparent,
           ),
           child: Text(
             text,
-            style: const TextStyle(
-              color: Color(0xff32A873),
+            style: TextStyle(
+              color: Theme.of(context).colorScheme.primary,
               fontWeight: FontWeight.bold,
               fontSize: 14,
             ),
           ),
-          ),
+        ),
       ),
     );
   }

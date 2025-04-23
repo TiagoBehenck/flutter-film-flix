@@ -1,3 +1,4 @@
+import 'package:filme_flix/common/extensions/build_context_extension.dart';
 import 'package:flutter/material.dart';
 
 class PrimaryButton extends StatelessWidget {
@@ -11,12 +12,10 @@ class PrimaryButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final size = MediaQuery.of(context).size;
-
     return Padding(
       padding: const EdgeInsets.all(8.0),
       child: SizedBox(
-        width: size.width,
+        width: context.width,
         height: 52,
         child: ElevatedButton(
           onPressed: onPressed,
@@ -24,12 +23,12 @@ class PrimaryButton extends StatelessWidget {
             shape: const RoundedRectangleBorder(
               borderRadius: BorderRadius.all(Radius.circular(4)),
             ),
-            backgroundColor: const Color(0xff32A873),
+            backgroundColor:Theme.of(context).colorScheme.primary,
           ),
           child: Text(
             text,
-            style: const TextStyle(
-              color: Color(0xff121212),
+            style: TextStyle(
+              color:Theme.of(context).colorScheme.onPrimary,
               fontWeight: FontWeight.bold,
               fontSize: 14,
             ),
