@@ -37,7 +37,7 @@ class _NavBarState extends State<NavBar> {
           type: BottomNavigationBarType.fixed,
           currentIndex: widget.index,
           onTap: (value) => changePage(value),
-          selectedItemColor: const Color(0xff32A873),
+          selectedItemColor: Theme.of(context).colorScheme.primary,
           unselectedItemColor: const Color(0xffBBBBBB),
           backgroundColor: Theme.of(context).colorScheme.onPrimary,
           items: const [
