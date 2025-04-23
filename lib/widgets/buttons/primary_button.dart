@@ -23,12 +23,12 @@ class PrimaryButton extends StatelessWidget {
             shape: const RoundedRectangleBorder(
               borderRadius: BorderRadius.all(Radius.circular(4)),
             ),
-            backgroundColor: const Color(0xff32A873),
+            backgroundColor:Theme.of(context).colorScheme.primary,
           ),
           child: Text(
             text,
-            style: const TextStyle(
-              color: Color(0xff121212),
+            style: TextStyle(
+              color:Theme.of(context).colorScheme.onPrimary,
               fontWeight: FontWeight.bold,
               fontSize: 14,
             ),
