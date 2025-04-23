@@ -30,7 +30,10 @@ class _NavBarState extends State<NavBar> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: SafeArea(child: widget.child),
+      body: SafeArea(
+        top: false,
+        child: widget.child,
+      ),
       bottomNavigationBar: Container(
         padding: const EdgeInsets.only(top: 6),
         child: BottomNavigationBar(
