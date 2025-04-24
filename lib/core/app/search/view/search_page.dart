@@ -1,3 +1,4 @@
+import 'package:filme_flix/widgets/movie_list/movie_list.dart';
 import 'package:filme_flix/widgets/search_input/search_input.dart';
 import 'package:flutter/material.dart';
 
@@ -8,6 +9,7 @@ class SearchPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        forceMaterialTransparency: true,
         title: const Text(
           'Search',
           style: TextStyle(
@@ -16,14 +18,25 @@ class SearchPage extends StatelessWidget {
           ),
         ),
       ),
-      body: const Padding(
-        padding: EdgeInsets.symmetric(horizontal: 16, vertical: 24),
+      body: Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 24),
         child: Column(
           children: [
-            SearchInput(),
+            const SearchInput(),
             Expanded(
-              child: Center(
-                child: Text('Search results will appear here'),
+              child: Padding(
+                padding: const EdgeInsets.only(top: 16),
+                child: ListView.builder(
+                  itemCount: 20,
+                  itemBuilder: (context, index) {
+                    return MovieList(
+                      releaseDate: '2023-10-01',
+                      title: 'Movie Title',
+                      onTap: () {},
+                      onFavorite: () {},
+                    );
+                  },
+                ),
               ),
             ),
           ],
