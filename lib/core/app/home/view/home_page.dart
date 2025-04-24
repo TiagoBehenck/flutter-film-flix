@@ -1,3 +1,4 @@
+import 'package:filme_flix/common/extensions/build_context_extension.dart';
 import 'package:filme_flix/widgets/banner_movie/banner_movie.dart';
 import 'package:filme_flix/widgets/movie_carrossel/movie_carrossel.dart';
 import 'package:flutter/material.dart';
@@ -7,22 +8,43 @@ class HomePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const Scaffold(
-      body: SingleChildScrollView(
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            BannerMovie(
-              src:
-                  'https://flutter.github.io/assets-for-api-docs/assets/widgets/owl.jpg',
+    return Scaffold(
+      extendBodyBehindAppBar: true,
+      body: CustomScrollView(
+        physics: const BouncingScrollPhysics(),
+        slivers: [
+          SliverAppBar(
+            backgroundColor: Colors.transparent,
+            expandedHeight: context.height * 0.6,
+            pinned: true,
+            elevation: 0,
+            floating: false,
+            stretch: true,
+            forceMaterialTransparency: true,
+            collapsedHeight: kToolbarHeight,
+            flexibleSpace: const FlexibleSpaceBar(
+              collapseMode: CollapseMode.parallax,
+              stretchModes: [
+                StretchMode.zoomBackground,
+              ],
+              background: BannerMovie(),
             ),
-            MovieCarrossel(
-              categoryTitle: 'New Arrivals',
-              imageUrl:
-                  'https://picsum.photos/120/180',
+          ),
+          SliverToBoxAdapter(
+            child: Container(
+              height: 8,
+              color: Colors.transparent,
             ),
-          ],
-        ),
+          ),
+          SliverList(
+            delegate: SliverChildListDelegate([
+              const MovieCarrossel(
+                categoryTitle: 'New Arrivals',
+              ),
+              const SizedBox(height: 500),
+            ]),
+          ),
+        ],
       ),
     );
   }

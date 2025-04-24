@@ -30,14 +30,17 @@ class _NavBarState extends State<NavBar> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: SafeArea(child: widget.child),
+      body: SafeArea(
+        top: false,
+        child: widget.child,
+      ),
       bottomNavigationBar: Container(
         padding: const EdgeInsets.only(top: 6),
         child: BottomNavigationBar(
           type: BottomNavigationBarType.fixed,
           currentIndex: widget.index,
           onTap: (value) => changePage(value),
-          selectedItemColor: const Color(0xff32A873),
+          selectedItemColor: Theme.of(context).colorScheme.primary,
           unselectedItemColor: const Color(0xffBBBBBB),
           backgroundColor: Theme.of(context).colorScheme.onPrimary,
           items: const [

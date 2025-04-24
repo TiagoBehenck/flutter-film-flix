@@ -1,15 +1,18 @@
+import 'package:filme_flix/repositories/movie_repository.dart';
+import 'package:filme_flix/widgets/movie_card/movie_card.dart';
+import 'package:filme_flix/widgets/movie_carrossel/movie_carrossel_empty.dart';
+import 'package:filme_flix/widgets/movie_carrossel/movie_carrossel_error.dart';
+import 'package:filme_flix/widgets/movie_carrossel/movie_carrossel_loading.dart';
 import 'package:flutter/material.dart';
 
 class MovieCarrossel extends StatelessWidget {
-  final String categoryTitle;
-  final String imageUrl;
-
   const MovieCarrossel({
     required this.categoryTitle,
-    required this.imageUrl,
     super.key,
   });
 
+  final String categoryTitle;
+  
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -28,26 +31,35 @@ class MovieCarrossel extends StatelessWidget {
             ),
           ),
           const SizedBox(height: 8),
-          SizedBox(
-            height: 200,
-            child: ListView.builder(
-              scrollDirection: Axis.horizontal,
-              itemCount: 10,
-              itemBuilder: (context, index) {
-                return Padding(
-                  padding: const EdgeInsets.only(right: 10),
-                  child: ClipRRect(
-                    borderRadius: BorderRadius.circular(10),
-                    child: Image.network(
-                      imageUrl,
-                      fit: BoxFit.cover,
-                      width: 120,
-                    ),
+          FutureBuilder(
+              future: MovieRepository().getMovies(),
+              builder: (ctx, snapshot) {
+                if (snapshot.connectionState == ConnectionState.waiting) {
+                  return const MovieCarrosselLoading();
+                }
+                if (snapshot.hasError) {
+                  return MovieCarrosselError(onRetry: () => MovieRepository().getMovies());
+                }
+                if (!snapshot.hasData || snapshot.data!.isEmpty) {
+                  return const MovieCarrosselEmpty();
+                }
+
+                final movies = snapshot.data ?? [];                
+
+                return SizedBox(
+                  height: 200,
+                  child: ListView.builder(
+                    scrollDirection: Axis.horizontal,
+                    itemCount: snapshot.data!.length,
+                    itemBuilder: (context, index) {
+                      return MovieCard(
+                        movie: movies[index],
+                        onTap: (){},
+                      );
+                    },
                   ),
                 );
-              },
-            ),
-          ),
+              })
         ],
       ),
     );
