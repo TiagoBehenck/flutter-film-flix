@@ -3,4 +3,5 @@ class RoutesConstants {
   static const login = '/login';
   static const signup = '/sign-up';
   static const home = '/home';
+  static const search = '/search';
 }
