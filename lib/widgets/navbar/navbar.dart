@@ -1,3 +1,4 @@
+import 'package:filme_flix/core/navigation/routes_constants.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
@@ -11,9 +12,9 @@ class NavBar extends StatefulWidget {
 }
 
 class _NavBarState extends State<NavBar> {
-  // TODO: Add a list of routes to the tabs
   final List<String> _tabs = [
-    '/home',
+    RoutesConstants.home,
+    RoutesConstants.search,
     '/search',
     '/favorites',
     '/settings',
