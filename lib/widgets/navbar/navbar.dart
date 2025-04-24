@@ -15,7 +15,6 @@ class _NavBarState extends State<NavBar> {
   final List<String> _tabs = [
     RoutesConstants.home,
     RoutesConstants.search,
-    '/search',
     '/favorites',
     '/settings',
   ];
