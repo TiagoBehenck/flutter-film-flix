@@ -38,7 +38,7 @@ class MovieList extends StatelessWidget {
           ),
           subtitle: Text(
             movie.releaseDate != null
-              ? DateTime.parse(movie.releaseDate!).year.toString()
+              ? (DateTime.tryParse(movie.releaseDate!)?.year.toString() ?? '')
               : '',
             maxLines: 2,
             overflow: TextOverflow.ellipsis,
