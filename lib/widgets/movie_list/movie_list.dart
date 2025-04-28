@@ -1,17 +1,17 @@
+import 'package:filme_flix/app_config.dart';
+import 'package:filme_flix/models/movie.dart';
 import 'package:flutter/material.dart';
 
 class MovieList extends StatelessWidget {
   const MovieList(
       {required this.onTap,
       required this.onFavorite,
-      required this.title,
-      required this.releaseDate,
+      required this.movie,
       super.key});
 
   final VoidCallback onTap;
   final VoidCallback onFavorite;
-  final String title;
-  final String releaseDate;
+  final Movie movie;
 
   @override
   Widget build(BuildContext context) {
@@ -23,21 +23,23 @@ class MovieList extends StatelessWidget {
           leading: ClipRRect(
             borderRadius: BorderRadius.circular(10),
             child: Image.network(
-              'https://flutter.github.io/assets-for-api-docs/assets/widgets/owl.jpg',
+             AppConfig.instance.imageUrl + (movie.imagePath ?? ''),
               fit: BoxFit.cover,
               width: 60,
               height: 80,
             ),
           ),
           title: Text(
-            title,
+            movie.title ?? '',
             style: const TextStyle(
               fontSize: 16,
               fontWeight: FontWeight.w700,
             ),
           ),
           subtitle: Text(
-            releaseDate,
+            movie.releaseDate != null
+              ? DateTime.parse(movie.releaseDate!).year.toString()
+              : '',
             maxLines: 2,
             overflow: TextOverflow.ellipsis,
             style: TextStyle(
