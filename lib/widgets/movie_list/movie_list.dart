@@ -23,23 +23,21 @@ class MovieList extends StatelessWidget {
           leading: ClipRRect(
             borderRadius: BorderRadius.circular(10),
             child: Image.network(
-             AppConfig.instance.imageUrl + (movie.imagePath ?? ''),
+             AppConfig.instance.imageUrl + movie.posterPath,
               fit: BoxFit.cover,
               width: 60,
               height: 80,
             ),
           ),
           title: Text(
-            movie.title ?? '',
+            movie.title,
             style: const TextStyle(
               fontSize: 16,
               fontWeight: FontWeight.w700,
             ),
           ),
           subtitle: Text(
-            movie.releaseDate != null
-              ? (DateTime.tryParse(movie.releaseDate!)?.year.toString() ?? '')
-              : '',
+            DateTime.tryParse(movie.releaseDate)?.year.toString() ?? '',
             maxLines: 2,
             overflow: TextOverflow.ellipsis,
             style: TextStyle(

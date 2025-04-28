@@ -22,7 +22,7 @@ class MovieCard extends StatelessWidget {
         child: ClipRRect(
           borderRadius: BorderRadius.circular(10),
           child: Image.network(
-            AppConfig.instance.imageUrl + (movie.imagePath ?? ''),
+            AppConfig.instance.imageUrl + movie.posterPath,
             fit: BoxFit.cover,
             width: 120,
             height: 180,
