@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 class Movie {
   final int id;
   final String? title;
@@ -19,4 +21,11 @@ class Movie {
       releaseDate: json['release_date'] ?? '',
     );
   }
+
+  String get toJson => jsonEncode({
+        'id': id,
+        'title': title,
+        'poster_path': imagePath,
+        'release_date': releaseDate,
+      });
 }
