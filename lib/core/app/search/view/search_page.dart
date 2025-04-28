@@ -1,3 +1,5 @@
+import 'package:filme_flix/models/movie.dart';
+import 'package:filme_flix/repositories/movie_repository.dart';
 import 'package:filme_flix/widgets/movie_list/movie_list.dart';
 import 'package:filme_flix/widgets/search_input/search_input.dart';
 import 'package:flutter/material.dart';
@@ -7,6 +9,14 @@ class SearchPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final TextEditingController searchController = TextEditingController();
+    final ValueNotifier<List<Movie>> searchResults = ValueNotifier([]);
+
+    Future<void> fetchMovies(String query) async {
+      final List<Movie> fetchedMovies = await MovieRepository().searchMovies(query);
+      searchResults.value = fetchedMovies;
+    }
+
     return Scaffold(
       appBar: AppBar(
         forceMaterialTransparency: true,
@@ -22,18 +32,37 @@ class SearchPage extends StatelessWidget {
         padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 24),
         child: Column(
           children: [
-            const SearchInput(),
+            SearchInput(
+              controller: searchController,
+              onChanged: (value) {
+                if (value.isNotEmpty) {
+                  fetchMovies(value);
+                } else {
+                  searchResults.value = [];
+                }
+              },
+            ),
             Expanded(
               child: Padding(
                 padding: const EdgeInsets.only(top: 16),
-                child: ListView.builder(
-                  itemCount: 20,
-                  itemBuilder: (context, index) {
-                    return MovieList(
-                      releaseDate: '2023-10-01',
-                      title: 'Movie Title',
-                      onTap: () {},
-                      onFavorite: () {},
+                child: ValueListenableBuilder<List<Movie>>(
+                  valueListenable: searchResults,
+                  builder: (context, movies, _) {
+                    if (movies.isEmpty) {
+                      return const Center(
+                        child: Text('No results found'),
+                      );
+                    }
+                    return ListView.builder(
+                      itemCount: movies.length,
+                      itemBuilder: (context, index) {
+                        final movie = movies[index];
+                        return MovieList(
+                          movie: movie,
+                          onTap: () {},
+                          onFavorite: () {},
+                        );
+                      },
                     );
                   },
                 ),
