@@ -101,6 +101,33 @@ class ExpandedAppBarContent extends StatelessWidget {
               ),
             ),
           ],
+        ),
+        const SizedBox(
+          height: 10,
+        ),
+        Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            OutlinedChip(
+              label: DateTime.tryParse(movie.releaseDate)?.year.toString() ?? '',
+              icon: const Icon(
+                Icons.calendar_today_rounded,
+                color: Colors.white,
+                size: 20,
+              ),
+            ),
+            const SizedBox(
+              width: 10,
+            ),
+            OutlinedChip(
+                label: '${movie.runtime ~/ 60}h ${movie.runtime % 60}m',
+              icon: const Icon(
+                Icons.access_time,
+                color: Colors.white,
+                size: 20,
+              ),
+            ),
+          ],
         )
       ],
     );
