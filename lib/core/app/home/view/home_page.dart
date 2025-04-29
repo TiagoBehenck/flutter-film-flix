@@ -1,4 +1,5 @@
 import 'package:filme_flix/common/extensions/build_context_extension.dart';
+import 'package:filme_flix/repositories/movie_repository.dart';
 import 'package:filme_flix/widgets/banner_movie/banner_movie.dart';
 import 'package:filme_flix/widgets/movie_carrossel/movie_carrossel.dart';
 import 'package:flutter/material.dart';
@@ -38,10 +39,18 @@ class HomePage extends StatelessWidget {
           ),
           SliverList(
             delegate: SliverChildListDelegate([
-              const MovieCarrossel(
-                categoryTitle: 'New Arrivals',
+              MovieCarrossel(
+                categoryTitle: 'Discover',
+                fetchData: MovieRepository().getMovies,
               ),
-              const SizedBox(height: 500),
+              MovieCarrossel(
+                categoryTitle: 'Top Rated',
+                fetchData: MovieRepository().getTopRatedMovies,
+              ),
+              MovieCarrossel(
+                categoryTitle: 'Popular',
+                fetchData: MovieRepository().getPopularMovies,
+              ),
             ]),
           ),
         ],
