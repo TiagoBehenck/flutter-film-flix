@@ -21,12 +21,16 @@ class MovieCard extends StatelessWidget {
         onTap: onTap,
         child: Hero(
           tag: movie.id,
-          child: Image.network(
-            AppConfig.instance.imageUrl + movie.posterPath,
-            fit: BoxFit.cover,
-            width: 120,
-            height: 180,
-            errorBuilder: (context, error, stackTrace) => MovieCardError(onRetry: () {}),
+          child: ClipRRect(
+            borderRadius: BorderRadius.circular(8),
+            child: Image.network(
+              AppConfig.instance.imageUrl + movie.posterPath,
+              fit: BoxFit.cover,
+              width: 120,
+              height: 180,
+              errorBuilder: (context, error, stackTrace) =>
+                  MovieCardError(onRetry: () {}),
+            ),
           ),
         ),
       ),
