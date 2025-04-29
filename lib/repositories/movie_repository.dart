@@ -16,7 +16,6 @@ class MovieRepository {
         'Accept': 'application/json',
       }, 
       queryParameters: {
-        'language': 'pt-BR',
         'include_adult': false,
      }
     ),
@@ -95,6 +94,20 @@ class MovieRepository {
       }
     } catch (e) {
       throw Exception('Failed to load movies: $e');
+    }
+  }
+
+  Future<Movie> getMovieDetails(int movieId) async {
+    try {
+      final response = await client.get('/movie/$movieId');
+
+      if (response.statusCode == 200) {
+        return Movie.fromJson(response.data);
+      } else {
+        throw Exception('Failed to load movie details');
+      }
+    } catch (e) {
+      throw Exception('Failed to load movie details: $e');
     }
   }
 }

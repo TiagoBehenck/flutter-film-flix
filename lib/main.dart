@@ -15,6 +15,7 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
         textTheme: GoogleFonts.getTextTheme('Inter').apply(
+          fontFamily: 'Inter',
           bodyColor: Colors.white,
           displayColor: Colors.white,
         ),
