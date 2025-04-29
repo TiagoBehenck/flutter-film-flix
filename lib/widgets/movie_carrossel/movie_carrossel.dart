@@ -10,10 +10,12 @@ import 'package:filme_flix/widgets/movie_carrossel/movie_carrossel_loading.dart'
 class MovieCarrossel extends StatelessWidget {
   const MovieCarrossel({
     required this.categoryTitle,
+    required this.fetchData,
     super.key,
   });
 
   final String categoryTitle;
+  final Future<List<dynamic>> Function() fetchData;
   
   @override
   Widget build(BuildContext context) {
@@ -34,7 +36,7 @@ class MovieCarrossel extends StatelessWidget {
           ),
           const SizedBox(height: 8),
           FutureBuilder(
-              future: MovieRepository().getMovies(),
+              future: fetchData(),
               builder: (ctx, snapshot) {
                 if (snapshot.connectionState == ConnectionState.waiting) {
                   return const MovieCarrosselLoading();
