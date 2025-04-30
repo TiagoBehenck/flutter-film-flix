@@ -19,14 +19,18 @@ class MovieCard extends StatelessWidget {
       padding: const EdgeInsets.only(right: 10),
       child: GestureDetector(
         onTap: onTap,
-        child: ClipRRect(
-          borderRadius: BorderRadius.circular(10),
-          child: Image.network(
-            AppConfig.instance.imageUrl + movie.posterPath,
-            fit: BoxFit.cover,
-            width: 120,
-            height: 180,
-            errorBuilder: (context, error, stackTrace) => MovieCardError(onRetry:  (){}),
+        child: Hero(
+          tag: movie.id,
+          child: ClipRRect(
+            borderRadius: BorderRadius.circular(8),
+            child: Image.network(
+              AppConfig.instance.imageUrl + movie.posterPath,
+              fit: BoxFit.cover,
+              width: 120,
+              height: 180,
+              errorBuilder: (context, error, stackTrace) =>
+                  MovieCardError(onRetry: () {}),
+            ),
           ),
         ),
       ),

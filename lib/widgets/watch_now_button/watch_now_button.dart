@@ -1,14 +1,28 @@
+import 'package:filme_flix/common/utils/launch_url.dart';
 import 'package:flutter/material.dart';
 
 class WatchNowButton extends StatelessWidget {
   const WatchNowButton({
+    required this.homepageUrl,
     super.key,
   });
+
+  final String homepageUrl;
 
   @override
   Widget build(BuildContext context) {
     return ElevatedButton(
-      onPressed: () {},
+      onPressed: () {
+        if (homepageUrl.isNotEmpty) {
+          UrlLauncherService().launch(homepageUrl);
+        } else {
+          ScaffoldMessenger.of(context).showSnackBar(
+            const SnackBar(
+              content: Text('No homepage available'),
+            ),
+          );
+        }
+      },
       style: ButtonStyle(
         padding: WidgetStateProperty.all(
           const EdgeInsets.all(0.0),

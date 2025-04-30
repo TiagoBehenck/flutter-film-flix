@@ -14,49 +14,45 @@ class Content extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.all(10.0),
+      padding: const EdgeInsets.all(16),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          const Row(
+          Row(
             children: [
               Expanded(
-                child: WatchNowButton(),
+                child: WatchNowButton(
+                  homepageUrl: movie.homepage,
+                ),
               ),
-              SizedBox(
+              const SizedBox(
                 width: 10,
               ),
-              FavoriteButton(),
+              const FavoriteButton(),
             ],
           ),
           const SizedBox(
             height: 8,
           ),
-          Divider(
-            color: Colors.grey[400],
-            height: 1,
-            thickness: 0.5,
-          ),
           const SizedBox(
-            height: 16,
-          ),
-          // Introduction title
-          const Text(
-            'Introduction',
-            textAlign: TextAlign.start,
-            style: TextStyle(
-              fontSize: 20,
-              fontWeight: FontWeight.w500,
-            ),
-          ),
-          const SizedBox(
-            height: 10,
+            height: 8,
           ),
           Text(
+            movie.genres.map((genre) => genre.name).join(', '),
+            style: const TextStyle(
+              color: Color(0xff969696),
+              fontSize: 12,
+              fontWeight: FontWeight.w400,
+            ),
+          ),
+           const SizedBox(
+            height: 8,
+          ),
+            Text(
             movie.overview,
-            textAlign: TextAlign.start,
-            style: const TextStyle(fontSize: 14, color: Colors.white),
-          )
+            textAlign: TextAlign.justify,
+            style: const TextStyle(fontSize: 13, color: Colors.white, fontWeight: FontWeight.w400),
+            )
         ],
       ),
     );

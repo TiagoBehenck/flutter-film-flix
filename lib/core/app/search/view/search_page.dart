@@ -1,8 +1,10 @@
+import 'package:filme_flix/core/navigation/routes_constants.dart';
 import 'package:filme_flix/models/movie.dart';
 import 'package:filme_flix/repositories/movie_repository.dart';
 import 'package:filme_flix/widgets/movie_list/movie_list.dart';
 import 'package:filme_flix/widgets/search_input/search_input.dart';
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 
 class SearchPage extends StatelessWidget {
   const SearchPage({super.key});
@@ -48,18 +50,18 @@ class SearchPage extends StatelessWidget {
                 child: ValueListenableBuilder<List<Movie>>(
                   valueListenable: searchResults,
                   builder: (context, movies, _) {
-                    if (movies.isEmpty) {
-                      return const Center(
-                        child: Text('No results found'),
-                      );
-                    }
                     return ListView.builder(
                       itemCount: movies.length,
                       itemBuilder: (context, index) {
                         final movie = movies[index];
                         return MovieList(
                           movie: movie,
-                          onTap: () {},
+                          onTap: () {
+                            context.push(
+                            RoutesConstants.detail,
+                            extra: movies[index],
+                          );
+                          },
                           onFavorite: () {},
                         );
                       },
