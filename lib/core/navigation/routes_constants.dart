@@ -5,4 +5,5 @@ class RoutesConstants {
   static const home = '/home';
   static const search = '/search';
   static const detail = '/detail';
+  static const favorites = '/favorites';
 }
