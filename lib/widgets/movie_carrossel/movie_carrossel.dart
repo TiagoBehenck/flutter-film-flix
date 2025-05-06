@@ -1,7 +1,6 @@
 import 'package:filme_flix/core/navigation/routes_constants.dart';
 import 'package:go_router/go_router.dart';
 import 'package:flutter/material.dart';
-import 'package:filme_flix/repositories/movie_repository.dart';
 import 'package:filme_flix/widgets/movie_card/movie_card.dart';
 import 'package:filme_flix/widgets/movie_carrossel/movie_carrossel_empty.dart';
 import 'package:filme_flix/widgets/movie_carrossel/movie_carrossel_error.dart';
@@ -42,7 +41,7 @@ class MovieCarrossel extends StatelessWidget {
                   return const MovieCarrosselLoading();
                 }
                 if (snapshot.hasError) {
-                  return MovieCarrosselError(onRetry: () => MovieRepository().getMovies());
+                  return MovieCarrosselError(onRetry: () => fetchData());
                 }
                 if (!snapshot.hasData || snapshot.data!.isEmpty) {
                   return const MovieCarrosselEmpty();
