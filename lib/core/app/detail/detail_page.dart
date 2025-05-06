@@ -25,18 +25,20 @@ class DetailPage extends StatefulWidget {
 
 class _DetailPageState extends State<DetailPage> {
   final ScrollController _scrollController = ScrollController();
+  late Future<Movie> _movieDetailsFuture;
   late final DetailService _service;
   late final DetailRepository _repository;
   bool _showTitle = false;
 
   @override
   void initState() {
+    super.initState();
     _scrollController.addListener(_onScroll);
     _service = DetailService(BaseService());
     _repository = DetailRepository(
       _service,
     );
-    super.initState();
+    _movieDetailsFuture = _repository.getMovieDetails(widget.movie.id);
   }
 
   @override
@@ -65,21 +67,19 @@ class _DetailPageState extends State<DetailPage> {
     final expandedBarHeight = context.height * 0.6;
     final statusBarHeight = MediaQuery.of(context).padding.top;
 
-    return FutureBuilder<Movie?>(
-      future: _repository.getMovieDetails(widget.movie.id),
+    return FutureBuilder<Movie>(
+      future: _movieDetailsFuture,
       builder: (context, snapshot) {
         if (snapshot.connectionState == ConnectionState.waiting) {
           return const DetailLoading();
         }
-        // if (snapshot.hasError) {
-        //   return DetailError(
-        //     onRetry: () {
-        //       setState(() {
-        //             _repository.getMovieDetails(widget.movie.id);
-        //       });
-        //     },
-        //   );
-        // }
+        if (snapshot.hasError) {
+          return DetailError(
+            onRetry: () {
+              _movieDetailsFuture;
+            },
+          );
+        }
         if (!snapshot.hasData) {
           return const Scaffold(
             body: Center(
