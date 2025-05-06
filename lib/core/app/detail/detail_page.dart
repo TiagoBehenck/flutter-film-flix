@@ -1,7 +1,9 @@
+import 'package:filme_flix/core/app/detail/repository/detail_repository.dart';
+import 'package:filme_flix/core/app/detail/service/detail_service.dart';
 import 'package:filme_flix/core/app/detail/widgets/detail_error/detail_error.dart';
+import 'package:filme_flix/core/http/service/_base/base_service.dart';
 import 'package:filme_flix/core/app/detail/widgets/detail_loading/detail_loading.dart';
 import 'package:filme_flix/models/movie.dart';
-import 'package:filme_flix/repositories/movie_repository.dart';
 import 'package:filme_flix/core/app/detail/widgets/blurred_backdrop_image/blurred_backdrop_image.dart';
 import 'package:filme_flix/common/extensions/build_context_extension.dart';
 import 'package:filme_flix/core/app/detail/widgets/collapsed_app_bar_content/collapsed_app_bar_content.dart';
@@ -24,13 +26,17 @@ class DetailPage extends StatefulWidget {
 class _DetailPageState extends State<DetailPage> {
   final ScrollController _scrollController = ScrollController();
   bool _showTitle = false;
-  late Future<Movie?> _movieDetailsFuture;
+  late final DetailRepository _repository;
+  late final DetailService _service;
 
   @override
   void initState() {
     super.initState();
     _scrollController.addListener(_onScroll);
-    _movieDetailsFuture = MovieRepository().getMovieDetails(widget.movie.id);
+    _service = DetailService(BaseService());
+    _repository = DetailRepository(
+      _service,
+    );
   }
 
   @override
@@ -56,11 +62,11 @@ class _DetailPageState extends State<DetailPage> {
 
   @override
   Widget build(BuildContext context) {
-    final expandedBarHeight = context.height * 0.6;
+    final expandedBarHeight = context.height * 0.55;
     final statusBarHeight = MediaQuery.of(context).padding.top;
 
     return FutureBuilder<Movie?>(
-      future: _movieDetailsFuture,
+      future: _repository.getMovieDetails(widget.movie.id),
       builder: (context, snapshot) {
         if (snapshot.connectionState == ConnectionState.waiting) {
           return const DetailLoading();
@@ -68,10 +74,7 @@ class _DetailPageState extends State<DetailPage> {
         if (snapshot.hasError) {
           return DetailError(
             onRetry: () {
-              setState(() {
-                _movieDetailsFuture =
-                    MovieRepository().getMovieDetails(widget.movie.id);
-              });
+              _repository.getMovieDetails(widget.movie.id);
             },
           );
         }
