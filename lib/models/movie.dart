@@ -1,11 +1,10 @@
-import 'dart:convert';
-
 import 'package:filme_flix/models/genre.dart';
+import 'package:filme_flix/models/json_serializable.dart';
 import 'package:filme_flix/models/production_company.dart';
 import 'package:filme_flix/models/production_country.dart';
 import 'package:filme_flix/models/spoken_language.dart';
 
-class Movie {
+class Movie extends JsonSerializable<Movie> {
   final bool adult;
   final String backdropPath;// null ou objeto
   final int budget;
@@ -123,6 +122,9 @@ class Movie {
       'vote_count': voteCount,
     };
   }
-
-  String get toJson => jsonEncode(toMap());
+  
+  @override
+  Map<String, dynamic> toJson() {
+    return toMap();
+  }
 }

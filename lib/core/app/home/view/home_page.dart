@@ -1,11 +1,30 @@
 import 'package:filme_flix/common/extensions/build_context_extension.dart';
-import 'package:filme_flix/repositories/movie_repository.dart';
+import 'package:filme_flix/core/app/home/repository/home_repository.dart';
+import 'package:filme_flix/core/app/home/service/home_service.dart';
+import 'package:filme_flix/core/http/service/_base/base_service.dart';
 import 'package:filme_flix/widgets/banner_movie/banner_movie.dart';
 import 'package:filme_flix/widgets/movie_carrossel/movie_carrossel.dart';
 import 'package:flutter/material.dart';
 
-class HomePage extends StatelessWidget {
+class HomePage extends StatefulWidget {
   const HomePage({super.key});
+
+  @override
+  State<HomePage> createState() => _HomePageState();
+}
+
+class _HomePageState extends State<HomePage> {
+  late final HomeRepository _repository;
+  late final HomeService _service;
+
+  @override
+  void initState() {
+    super.initState();
+    _service = HomeService(BaseService());
+    _repository = HomeRepository(
+      _service,
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -16,7 +35,7 @@ class HomePage extends StatelessWidget {
         slivers: [
           SliverAppBar(
             backgroundColor: Colors.transparent,
-            expandedHeight: context.height * 0.6,
+            expandedHeight: context.height * 0.55,
             pinned: true,
             elevation: 0,
             floating: false,
@@ -41,15 +60,15 @@ class HomePage extends StatelessWidget {
             delegate: SliverChildListDelegate([
               MovieCarrossel(
                 categoryTitle: 'Discover',
-                fetchData: MovieRepository().getMovies,
-              ),
-              MovieCarrossel(
-                categoryTitle: 'Top Rated',
-                fetchData: MovieRepository().getTopRatedMovies,
+                fetchData: _repository.getMovies,
               ),
               MovieCarrossel(
                 categoryTitle: 'Popular',
-                fetchData: MovieRepository().getPopularMovies,
+                fetchData: _repository.getPopularMovies,
+              ),
+              MovieCarrossel(
+                categoryTitle: 'Top Rated',
+                fetchData: _repository.getTopRatedMovies,
               ),
             ]),
           ),
