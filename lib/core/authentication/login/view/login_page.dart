@@ -62,11 +62,11 @@ class _LoginPageState extends State<LoginPage> {
                 ),
               ),
               const SizedBox(height: 64),
-              TextFormField(
-                controller: sigUpController['email'],
+                TextFormField(
+                controller: sigUpController['email']!..text = 'example@example.com',
                 validator: (value) {
                   if (value == null || value.isEmpty) {
-                    return 'Please enter a valid email';
+                  return 'Please enter a valid email';
                   }
                   return null;
                 },
@@ -81,10 +81,10 @@ class _LoginPageState extends State<LoginPage> {
                   labelText: 'Email',
                   hintText: 'Enter your email',
                   hintStyle: TextStyle(
-                    color:Theme.of(context).colorScheme.primary,
+                  color:Theme.of(context).colorScheme.primary,
                   ),
                 ),
-              ),
+                ),
               const SizedBox(height: 32),
               TextFormField(
                 obscureText: _isObscure,
