@@ -1,13 +1,32 @@
+import 'package:filme_flix/core/app/search/repository/search_repository.dart';
+import 'package:filme_flix/core/app/search/service/search_service.dart';
+import 'package:filme_flix/core/http/service/_base/base_service.dart';
 import 'package:filme_flix/core/navigation/routes_constants.dart';
 import 'package:filme_flix/models/movie.dart';
-import 'package:filme_flix/repositories/movie_repository.dart';
 import 'package:filme_flix/widgets/movie_list/movie_list.dart';
 import 'package:filme_flix/widgets/search_input/search_input.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
-class SearchPage extends StatelessWidget {
+class SearchPage extends StatefulWidget {
   const SearchPage({super.key});
+
+  @override
+  State<SearchPage> createState() => _SearchPageState();
+}
+
+class _SearchPageState extends State<SearchPage> {
+  late final SearchRepository _repository;
+  late final SearchService _service;
+
+  @override
+  void initState() {
+    super.initState();
+    _service = SearchService(BaseService());
+    _repository = SearchRepository(
+      _service,
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -15,7 +34,7 @@ class SearchPage extends StatelessWidget {
     final ValueNotifier<List<Movie>> searchResults = ValueNotifier([]);
 
     Future<void> fetchMovies(String query) async {
-      final List<Movie> fetchedMovies = await MovieRepository().searchMovies(query);
+      final List<Movie> fetchedMovies = await _repository.searchMovies(query);
       searchResults.value = fetchedMovies;
     }
 
@@ -58,9 +77,9 @@ class SearchPage extends StatelessWidget {
                           movie: movie,
                           onTap: () {
                             context.push(
-                            RoutesConstants.detail,
-                            extra: movies[index],
-                          );
+                              RoutesConstants.detail,
+                              extra: movies[index],
+                            );
                           },
                           onFavorite: () {},
                         );
