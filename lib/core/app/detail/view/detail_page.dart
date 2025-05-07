@@ -65,7 +65,7 @@ class _DetailPageState extends State<DetailPage> {
   @override
   Widget build(BuildContext context) {
     final expandedBarHeight = context.height * 0.6;
-    final statusBarHeight = context.paddingBottom;
+    final statusBarHeight = context.paddingTop;
 
     return FutureBuilder<Movie>(
       future: _movieDetailsFuture,
