@@ -1,4 +1,5 @@
-import 'package:filme_flix/core/app/detail/detail_page.dart';
+import 'package:filme_flix/core/app/detail/view/detail_page.dart';
+import 'package:filme_flix/core/app/favorites/view/favorites_page.dart';
 import 'package:filme_flix/core/app/home/view/home_page.dart';
 import 'package:filme_flix/core/app/search/view/search_page.dart';
 import 'package:filme_flix/core/authentication/landing/view/landing_page.dart';
@@ -50,10 +51,15 @@ final router = GoRouter(initialLocation: RoutesConstants.landing, routes: [
             builder: (context, state) {
               return const HomePage();
             }),
-            GoRoute(
+        GoRoute(
             path: RoutesConstants.search,
             builder: (context, state) {
               return const SearchPage();
+            }),
+        GoRoute(
+            path: RoutesConstants.favorites,
+            builder: (context, state) {
+              return const FavoritesPage();
             })
       ])
 ]);

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
-class DetailError extends StatelessWidget {
-  const DetailError({
+class FavoritesError extends StatelessWidget {
+  const FavoritesError({
     required this.onRetry,
     super.key,
   });

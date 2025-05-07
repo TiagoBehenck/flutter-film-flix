@@ -16,10 +16,4 @@ class DetailRepository extends CachedRepository {
       cacheDuration: 60, // Cache de 1 hora
     );
   }
-  
-  @override
-  Future<void> clearAllCache() async {
-    // TODO: implement clearAllCache
-    throw UnimplementedError();
-  }
 }

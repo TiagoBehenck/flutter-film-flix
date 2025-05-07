@@ -6,6 +6,9 @@ import 'package:filme_flix/models/movie.dart';
 
 class HomeRepository extends CachedRepository {
   final HomeService _service;
+  final String _moviesKey = 'movies';
+  final String _moviesTopRatedKey = 'movies_to_rated';
+  final String _moviesPopularKey = 'movies_popular';
 
   HomeRepository(
     this._service,
@@ -14,7 +17,7 @@ class HomeRepository extends CachedRepository {
   Future<List<Movie>> getMovies() async {
     return getListWithCache<Movie>(
       apiCall: () =>  _service.getMovies(),
-      cacheKey: 'movies',
+      cacheKey: _moviesKey,
       cacheDuration: 60,
     );
   }
@@ -22,7 +25,7 @@ class HomeRepository extends CachedRepository {
   Future<List<Movie>> getTopRatedMovies() async {
     return getListWithCache<Movie>(
       apiCall: () =>  _service.getTopRatedMovies(),
-      cacheKey: 'movies_top_rated',
+      cacheKey: _moviesTopRatedKey,
       cacheDuration: 60,
     );
   }
@@ -30,14 +33,16 @@ class HomeRepository extends CachedRepository {
   Future<List<Movie>> getPopularMovies() async {
     return getListWithCache<Movie>(
       apiCall: () =>  _service.getPopularMovies(),
-      cacheKey: 'movies_popular',
+      cacheKey: _moviesPopularKey,
       cacheDuration: 60,
     );
   }
-  
-  @override
-  Future<void> clearAllCache() {
-    // TODO: implement clearAllCache
-    throw UnimplementedError();
+
+  Future<void> clearAllCache() async {
+    await Future.wait([
+      clearCache(_moviesKey),
+      clearCache(_moviesTopRatedKey),
+      clearCache(_moviesPopularKey),
+    ]);
   }
 }
