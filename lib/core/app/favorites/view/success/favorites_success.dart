@@ -6,10 +6,7 @@ import 'package:filme_flix/app_config.dart';
 import 'package:filme_flix/core/navigation/routes_constants.dart';
 
 class FavoritesSuccess extends StatelessWidget {
-  const FavoritesSuccess({
-    required this.favoriteMovie,
-    super.key
-  });
+  const FavoritesSuccess({required this.favoriteMovie, super.key});
 
   final List<Movie> favoriteMovie;
 
@@ -20,11 +17,16 @@ class FavoritesSuccess extends StatelessWidget {
       itemBuilder: (context, index) {
         final favorite = favoriteMovie[index];
         return ListTile(
-          leading: Image.network(
-            AppConfig.instance.imageUrl + favorite.posterPath,
-            width: 50,
-            height: 50,
-            fit: BoxFit.cover,
+          dense: true,
+          visualDensity: const VisualDensity(vertical: 4),
+          leading: ClipRRect(
+            borderRadius: BorderRadius.circular(10.0),
+            child: Image.network(
+              AppConfig.instance.imageUrl + favorite.posterPath,
+              width: 60,
+              height: 80,
+              fit: BoxFit.cover,
+            ),
           ),
           title: Text(
             favorite.title,

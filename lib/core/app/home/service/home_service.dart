@@ -53,7 +53,7 @@ class HomeService {
     try {
       final response =
           await _baseService.get('/movie/popular', queryParameters: {
-        'page': 1,
+        'page': 2,
       });
 
       if (response.statusCode == 200) {
