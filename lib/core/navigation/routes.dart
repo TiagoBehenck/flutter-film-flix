@@ -1,4 +1,4 @@
-import 'package:filme_flix/core/app/detail/detail_page.dart';
+import 'package:filme_flix/core/app/detail/view/detail_page.dart';
 import 'package:filme_flix/core/app/favorites/view/favorites_page.dart';
 import 'package:filme_flix/core/app/home/view/home_page.dart';
 import 'package:filme_flix/core/app/search/view/search_page.dart';
