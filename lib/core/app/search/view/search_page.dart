@@ -81,7 +81,6 @@ class _SearchPageState extends State<SearchPage> {
                               extra: movies[index],
                             );
                           },
-                          onFavorite: () {},
                         );
                       },
                     );

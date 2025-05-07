@@ -3,14 +3,13 @@ import 'package:filme_flix/models/movie.dart';
 import 'package:flutter/material.dart';
 
 class MovieList extends StatelessWidget {
-  const MovieList(
-      {required this.onTap,
-      required this.onFavorite,
-      required this.movie,
-      super.key});
+  const MovieList({
+    required this.onTap,
+    required this.movie,
+    super.key,
+  });
 
   final VoidCallback onTap;
-  final VoidCallback onFavorite;
   final Movie movie;
 
   @override
@@ -45,10 +44,6 @@ class MovieList extends StatelessWidget {
               fontWeight: FontWeight.w400,
               color: Colors.grey[400],
             ),
-          ),
-          trailing: IconButton(
-            icon: const Icon(Icons.favorite_outline),
-            onPressed: onFavorite,
           ),
           onTap: onTap,
         ),
