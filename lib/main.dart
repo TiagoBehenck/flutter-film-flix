@@ -1,12 +1,17 @@
 import 'package:filme_flix/core/navigation/routes.dart';
 import 'package:filme_flix/infra/db/storage.dart';
+import 'package:filme_flix/providers.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Storage.init();
-  runApp(const MyApp());
+  runApp(
+    providers(
+      child: const MyApp(),
+    )
+  );
 }
 
 class MyApp extends StatelessWidget {
