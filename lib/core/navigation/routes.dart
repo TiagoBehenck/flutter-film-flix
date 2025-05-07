@@ -2,6 +2,7 @@ import 'package:filme_flix/core/app/detail/view/detail_page.dart';
 import 'package:filme_flix/core/app/favorites/view/favorites_page.dart';
 import 'package:filme_flix/core/app/home/view/home_page.dart';
 import 'package:filme_flix/core/app/search/view/search_page.dart';
+import 'package:filme_flix/core/app/settings/view/settings_page.dart';
 import 'package:filme_flix/core/authentication/landing/view/landing_page.dart';
 import 'package:filme_flix/core/authentication/login/view/login_page.dart';
 import 'package:filme_flix/core/authentication/signup/view/signup_page.dart';
@@ -60,6 +61,11 @@ final router = GoRouter(initialLocation: RoutesConstants.landing, routes: [
             path: RoutesConstants.favorites,
             builder: (context, state) {
               return const FavoritesPage();
+            }),
+        GoRoute(
+            path: RoutesConstants.settings,
+            builder: (context, state) {
+              return const SettingsPage();
             })
       ])
 ]);
