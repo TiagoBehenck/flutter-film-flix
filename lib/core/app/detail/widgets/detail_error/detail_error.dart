@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 
 class DetailError extends StatelessWidget {
   const DetailError({
-    super.key,
     required this.onRetry,
+    super.key,
   });
 
   final VoidCallback onRetry;

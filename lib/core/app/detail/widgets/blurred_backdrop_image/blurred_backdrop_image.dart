@@ -1,8 +1,9 @@
 import 'dart:ui';
+import 'package:flutter/material.dart';
 
 import 'package:filme_flix/app_config.dart';
 import 'package:filme_flix/models/movie.dart';
-import 'package:flutter/material.dart';
+import 'package:filme_flix/common/extensions/build_context_extension.dart';
 
 class BlurredBackdropImage extends StatelessWidget {
   const BlurredBackdropImage({
@@ -25,7 +26,7 @@ class BlurredBackdropImage extends StatelessWidget {
             fit: BoxFit.cover,
           ),
         ),
-        height: MediaQuery.of(context).size.height / 1.5,
+        height: context.height / 1.5,
         child: BackdropFilter(
             filter: ImageFilter.blur(sigmaX: 7.0, sigmaY: 7.0),
             child: Container(

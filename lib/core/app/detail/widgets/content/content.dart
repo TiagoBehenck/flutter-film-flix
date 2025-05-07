@@ -1,15 +1,38 @@
+import 'package:filme_flix/core/app/detail/store/detail_bloc.dart';
+import 'package:filme_flix/core/app/detail/store/events/detail_events.dart';
+import 'package:filme_flix/core/app/detail/store/state/detail_state.dart';
+import 'package:filme_flix/core/app/favorites/store/favorites_bloc.dart';
 import 'package:filme_flix/models/movie.dart';
 import 'package:filme_flix/widgets/favorite_button/favorite_button.dart';
 import 'package:filme_flix/widgets/watch_now_button/watch_now_button.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
-class Content extends StatelessWidget {
+class Content extends StatefulWidget {
+  final Movie movie;
+
   const Content({
-    super.key,
     required this.movie,
+    super.key,
   });
 
-  final Movie movie;
+  @override
+  State<Content> createState() => _Content();
+}
+
+class _Content extends State<Content> {
+  late FavoritesBloc _favoritesBloc;
+  late DetailBloc _detailsBloc;
+  late Movie movie = widget.movie;
+
+  @override
+  void initState() {
+    super.initState();
+
+    _favoritesBloc = context.read<FavoritesBloc>();
+    _detailsBloc = DetailBloc(favoritesBloc: _favoritesBloc);
+    _detailsBloc.add(GetIsFavoriteMovie(movie: movie));
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -28,14 +51,24 @@ class Content extends StatelessWidget {
               const SizedBox(
                 width: 10,
               ),
-              const FavoriteButton(),
+              BlocBuilder<DetailBloc, DetailState>(
+                bloc: _detailsBloc,
+                builder: (context, state) {
+                  return switch (state) {
+                    DetailStateStateSuccess() => FavoriteButton(
+                        isFavorite: state.isFavoriteMovie,
+                        onPressed: () {
+                          _detailsBloc.add(ToggleFavoriteMovie(movie: movie));
+                        },
+                      ),
+                    _ => const SizedBox.shrink(),
+                  };
+                },
+              ),
             ],
           ),
           const SizedBox(
-            height: 8,
-          ),
-          const SizedBox(
-            height: 8,
+            height: 16,
           ),
           Text(
             movie.genres.map((genre) => genre.name).join(', '),
@@ -45,14 +78,15 @@ class Content extends StatelessWidget {
               fontWeight: FontWeight.w400,
             ),
           ),
-           const SizedBox(
+          const SizedBox(
             height: 8,
           ),
-            Text(
+          Text(
             movie.overview,
             textAlign: TextAlign.justify,
-            style: const TextStyle(fontSize: 13, color: Colors.white, fontWeight: FontWeight.w400),
-            )
+            style: const TextStyle(
+                fontSize: 13, color: Colors.white, fontWeight: FontWeight.w400),
+          )
         ],
       ),
     );
