@@ -1,3 +1,4 @@
+import 'package:filme_flix/common/styles/text/app_text_styles.dart';
 import 'package:flutter/material.dart';
 
 class SettingsPage extends StatelessWidget {
@@ -8,9 +9,9 @@ class SettingsPage extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         forceMaterialTransparency: true,
-        title: const Text(
+        title:  Text(
           'Settings',
-          style: TextStyle(fontSize: 18, fontWeight: FontWeight.w700),
+          style: AppTextStyles.h1,
         ),
       ),
       body: Padding(
@@ -27,22 +28,18 @@ class SettingsPage extends StatelessWidget {
                     height: 90,
                   ),
                 ),
-                const Padding(
-                  padding: EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+                 Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
                         'Zeta',
-                        style: TextStyle(
-                            fontSize: 16, fontWeight: FontWeight.w600),
+                        style: AppTextStyles.labelPrimary,
                       ),
                       Text(
                         'example@gmail.com',
-                        style: TextStyle(
-                          fontSize: 14,
-                          fontWeight: FontWeight.w400,
-                        ),
+                        style: AppTextStyles.captionSmall.copyWith(fontSize: 14),
                       ),
                     ],
                   ),
@@ -50,59 +47,59 @@ class SettingsPage extends StatelessWidget {
               ],
             ),
             const SizedBox(height: 8),
-            const ListTile(
-              leading: Icon(Icons.manage_accounts),
+            ListTile(
+              leading: const Icon(Icons.manage_accounts),
               title: Text(
                 'Account',
-                style: TextStyle(fontSize: 16, fontWeight: FontWeight.w500),
+                style: AppTextStyles.labelPrimary,
               ),
             ),
             const SizedBox(height: 8),
-            const ListTile(
-              leading: Icon(Icons.lock_person),
+            ListTile(
+              leading: const Icon(Icons.lock_person),
               title: Text(
                 'Privacy',
-                style: TextStyle(fontSize: 16, fontWeight: FontWeight.w500),
+                style: AppTextStyles.labelPrimary,
               ),
             ),
             const SizedBox(height: 8),
-            const ListTile(
-              leading: Icon(Icons.play_circle),
+            ListTile(
+              leading: const Icon(Icons.play_circle),
               title: Text(
                 'Appearance',
-                style: TextStyle(fontSize: 16, fontWeight: FontWeight.w500),
+                style: AppTextStyles.labelPrimary,
               ),
             ),
             const SizedBox(height: 8),
-            const ListTile(
-              leading: Icon(Icons.notifications),
+            ListTile(
+              leading: const Icon(Icons.notifications),
               title: Text(
                 'Notifications',
-                style: TextStyle(fontSize: 16, fontWeight: FontWeight.w500),
+                style: AppTextStyles.labelPrimary,
               ),
             ),
             const SizedBox(height: 8),
-            const ListTile(
-              leading: Icon(Icons.storage),
+            ListTile(
+              leading: const Icon(Icons.storage),
               title: Text(
                 'Storage',
-                style: TextStyle(fontSize: 16, fontWeight: FontWeight.w500),
+                style: AppTextStyles.labelPrimary,
               ),
             ),
             const SizedBox(height: 8),
-            const ListTile(
-              leading: Icon(Icons.accessibility),
+            ListTile(
+              leading: const Icon(Icons.accessibility),
               title: Text(
                 'Accessibility',
-                style: TextStyle(fontSize: 16, fontWeight: FontWeight.w500),
+                style: AppTextStyles.labelPrimary,
               ),
             ),
             const SizedBox(height: 8),
-            const ListTile(
-              leading: Icon(Icons.help),
+            ListTile(
+              leading: const Icon(Icons.help),
               title: Text(
                 'Help',
-                style: TextStyle(fontSize: 16, fontWeight: FontWeight.w500),
+                style: AppTextStyles.labelPrimary,
               ),
             ),
           ],

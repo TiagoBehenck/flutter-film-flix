@@ -5,15 +5,16 @@ import 'package:filme_flix/widgets/movie_card/movie_card.dart';
 import 'package:filme_flix/widgets/movie_carrossel/movie_carrossel_empty.dart';
 import 'package:filme_flix/widgets/movie_carrossel/movie_carrossel_error.dart';
 import 'package:filme_flix/widgets/movie_carrossel/movie_carrossel_loading.dart';
+import 'package:filme_flix/common/styles/text/app_text_styles.dart';
 
 class MovieCarrossel extends StatelessWidget {
   const MovieCarrossel({
-    required this.categoryTitle,
+    required this.titleBold,
     required this.fetchData,
     super.key,
   });
 
-  final String categoryTitle;
+  final String titleBold;
   final Future<List<dynamic>> Function() fetchData;
   
   @override
@@ -27,11 +28,8 @@ class MovieCarrossel extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Text(
-            categoryTitle,
-            style: const TextStyle(
-              fontSize: 20,
-              fontWeight: FontWeight.w700,
-            ),
+            titleBold,
+            style: AppTextStyles.h3,
           ),
           const SizedBox(height: 8),
           FutureBuilder(

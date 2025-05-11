@@ -1,3 +1,4 @@
+import 'package:filme_flix/common/styles/text/app_text_styles.dart';
 import 'package:filme_flix/app_config.dart';
 import 'package:filme_flix/models/movie.dart';
 import 'package:flutter/material.dart';
@@ -20,11 +21,7 @@ class CollapsedAppBarContent extends StatelessWidget {
         movie.title,
         overflow: TextOverflow.ellipsis,
         maxLines: 1,
-        style: const TextStyle(
-          fontSize: 18,
-          color: Colors.white,
-          fontWeight: FontWeight.bold,
-        ),
+        style: AppTextStyles.h3,
         ),
       ),
       SizedBox(

@@ -1,3 +1,4 @@
+import 'package:filme_flix/common/styles/text/app_text_styles.dart';
 import 'package:filme_flix/core/app/search/repository/search_repository.dart';
 import 'package:filme_flix/core/app/search/service/search_service.dart';
 import 'package:filme_flix/core/http/service/_base/base_service.dart';
@@ -18,6 +19,14 @@ class SearchPage extends StatefulWidget {
 class _SearchPageState extends State<SearchPage> {
   late final SearchRepository _repository;
   late final SearchService _service;
+  late final ScrollController _scrollController = ScrollController();
+  final TextEditingController searchController = TextEditingController();
+  final ValueNotifier<List<Movie>> searchResults = ValueNotifier([]);
+
+  Future<void> fetchMovies(String query) async {
+    final List<Movie> fetchedMovies = await _repository.searchMovies(query);
+    searchResults.value = [...searchResults.value, ...fetchedMovies];
+  }
 
   @override
   void initState() {
@@ -26,27 +35,26 @@ class _SearchPageState extends State<SearchPage> {
     _repository = SearchRepository(
       _service,
     );
+    _scrollController.addListener(_onScroll);
+  }
+
+  void _onScroll() async {
+    final screenEndReached = _scrollController.position.pixels >=
+        _scrollController.position.maxScrollExtent - 300;
+
+    if (screenEndReached) {
+      await fetchMovies(searchController.text);
+    }
   }
 
   @override
   Widget build(BuildContext context) {
-    final TextEditingController searchController = TextEditingController();
-    final ValueNotifier<List<Movie>> searchResults = ValueNotifier([]);
-
-    Future<void> fetchMovies(String query) async {
-      final List<Movie> fetchedMovies = await _repository.searchMovies(query);
-      searchResults.value = fetchedMovies;
-    }
-
     return Scaffold(
       appBar: AppBar(
         forceMaterialTransparency: true,
-        title: const Text(
+        title: Text(
           'Search',
-          style: TextStyle(
-            fontSize: 18,
-            fontWeight: FontWeight.w700,
-          ),
+          style: AppTextStyles.h3,
         ),
       ),
       body: Padding(
@@ -70,6 +78,7 @@ class _SearchPageState extends State<SearchPage> {
                   valueListenable: searchResults,
                   builder: (context, movies, _) {
                     return ListView.builder(
+                      controller: _scrollController,
                       itemCount: movies.length,
                       itemBuilder: (context, index) {
                         final movie = movies[index];

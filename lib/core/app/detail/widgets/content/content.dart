@@ -1,3 +1,4 @@
+import 'package:filme_flix/common/styles/text/app_text_styles.dart';
 import 'package:filme_flix/core/app/detail/store/detail_bloc.dart';
 import 'package:filme_flix/core/app/detail/store/events/detail_events.dart';
 import 'package:filme_flix/core/app/detail/store/state/detail_state.dart';
@@ -72,11 +73,7 @@ class _Content extends State<Content> {
           ),
           Text(
             movie.genres.map((genre) => genre.name).join(', '),
-            style: const TextStyle(
-              color: Color(0xff969696),
-              fontSize: 12,
-              fontWeight: FontWeight.w400,
-            ),
+            style: AppTextStyles.captionSmall,
           ),
           const SizedBox(
             height: 8,
@@ -84,8 +81,7 @@ class _Content extends State<Content> {
           Text(
             movie.overview,
             textAlign: TextAlign.justify,
-            style: const TextStyle(
-                fontSize: 13, color: Colors.white, fontWeight: FontWeight.w400),
+            style: AppTextStyles.bodySmall,
           )
         ],
       ),

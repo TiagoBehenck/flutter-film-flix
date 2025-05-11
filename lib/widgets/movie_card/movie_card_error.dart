@@ -1,3 +1,4 @@
+import 'package:filme_flix/common/styles/text/app_text_styles.dart';
 import 'package:flutter/material.dart';
 
 class MovieCardError extends StatelessWidget {
@@ -20,9 +21,9 @@ class MovieCardError extends StatelessWidget {
             size: 48.0,
           ),
           const SizedBox(height: 16.0),
-          const Text(
+          Text(
             'Something went wrong!',
-            style: TextStyle(fontSize: 16.0, color: Colors.black54),
+            style: AppTextStyles.errorMedium,
           ),
           const SizedBox(height: 16.0),
           ElevatedButton(

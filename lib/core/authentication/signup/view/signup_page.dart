@@ -1,3 +1,4 @@
+import 'package:filme_flix/common/styles/text/app_text_styles.dart';
 import 'package:filme_flix/core/navigation/routes_constants.dart';
 import 'package:filme_flix/widgets/buttons/primary_button.dart';
 import 'package:flutter/material.dart';
@@ -59,12 +60,9 @@ class _SignUpPageState extends State<SignUpPage> {
             mainAxisAlignment: MainAxisAlignment.center,
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
-              const Text(
+              Text(
                 'Login',
-                style: TextStyle(
-                  fontWeight: FontWeight.bold,
-                  fontSize: 24,
-                ),
+                style: AppTextStyles.h1,
               ),
               const SizedBox(height: 64),
               TextFormField(
@@ -163,21 +161,16 @@ class _SignUpPageState extends State<SignUpPage> {
                 mainAxisAlignment: MainAxisAlignment.center,
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
-                  const Text(
+                  Text(
                     'Already have an account? ',
-                    style: TextStyle(
-                      fontWeight: FontWeight.w400,
-                      fontSize: 13,
-                    ),
+                    style: AppTextStyles.bodySmall,
                   ),
                   GestureDetector(
                     onTap: () => context.push(RoutesConstants.login),
-                    child: const Text(
+                    child: Text(
                       'Login',
-                      style: TextStyle(
-                        color: Color(0xFF95ACFF),
-                        fontWeight: FontWeight.w400,
-                        fontSize: 13,
+                      style: AppTextStyles.bodySmall.copyWith(
+                        color: const Color(0xFF95ACFF),
                       ),
                     ),
                   ),

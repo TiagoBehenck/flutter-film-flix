@@ -1,3 +1,4 @@
+import 'package:filme_flix/common/styles/text/app_text_styles.dart';
 import 'package:flutter/material.dart';
 
 class FavoritesError extends StatelessWidget {
@@ -20,13 +21,9 @@ class FavoritesError extends StatelessWidget {
             size: 48.0,
           ),
           const SizedBox(height: 16.0),
-          const Text(
+          Text(
             'Something went wrong!',
-            style: TextStyle(
-                fontSize: 24.0,
-                color: Colors.white,
-                decoration: TextDecoration.none,
-            ),
+            style: AppTextStyles.errorMedium
           ),
           const SizedBox(height: 20),
           ElevatedButton(

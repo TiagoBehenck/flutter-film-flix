@@ -1,3 +1,4 @@
+import 'package:filme_flix/common/styles/text/app_text_styles.dart';
 import 'package:filme_flix/common/extensions/build_context_extension.dart';
 import 'package:flutter/material.dart';
 
@@ -25,10 +26,8 @@ class SecondaryButton extends StatelessWidget {
           ),
           child: Text(
             text,
-            style: TextStyle(
+            style: AppTextStyles.buttonMedium.copyWith(
               color: Theme.of(context).colorScheme.primary,
-              fontWeight: FontWeight.bold,
-              fontSize: 14,
             ),
           ),
         ),

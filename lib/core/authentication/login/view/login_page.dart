@@ -1,3 +1,4 @@
+import 'package:filme_flix/common/styles/text/app_text_styles.dart';
 import 'package:filme_flix/core/navigation/routes_constants.dart';
 import 'package:filme_flix/widgets/buttons/primary_button.dart';
 import 'package:flutter/material.dart';
@@ -54,37 +55,35 @@ class _LoginPageState extends State<LoginPage> {
             mainAxisAlignment: MainAxisAlignment.center,
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
-              const Text(
+              Text(
                 'Login',
-                style: TextStyle(
-                  fontWeight: FontWeight.bold,
-                  fontSize: 24,
-                ),
+                style: AppTextStyles.h1,
               ),
               const SizedBox(height: 64),
-                TextFormField(
-                controller: sigUpController['email']!..text = 'example@example.com',
+              TextFormField(
+                controller: sigUpController['email']!
+                  ..text = 'example@example.com',
                 validator: (value) {
                   if (value == null || value.isEmpty) {
-                  return 'Please enter a valid email';
+                    return 'Please enter a valid email';
                   }
                   return null;
                 },
                 keyboardType: TextInputType.emailAddress,
                 style: TextStyle(
-                  color:Theme.of(context).colorScheme.primary,
+                  color: Theme.of(context).colorScheme.primary,
                 ),
                 decoration: InputDecoration(
                   prefixIcon: const Icon(Icons.email),
-                  prefixIconColor:Theme.of(context).colorScheme.primary,
+                  prefixIconColor: Theme.of(context).colorScheme.primary,
                   border: const OutlineInputBorder(),
                   labelText: 'Email',
                   hintText: 'Enter your email',
                   hintStyle: TextStyle(
-                  color:Theme.of(context).colorScheme.primary,
+                    color: Theme.of(context).colorScheme.primary,
                   ),
                 ),
-                ),
+              ),
               const SizedBox(height: 32),
               TextFormField(
                 obscureText: _isObscure,
@@ -97,11 +96,11 @@ class _LoginPageState extends State<LoginPage> {
                 },
                 keyboardType: TextInputType.visiblePassword,
                 style: TextStyle(
-                  color:Theme.of(context).colorScheme.primary,
+                  color: Theme.of(context).colorScheme.primary,
                 ),
                 decoration: InputDecoration(
                   prefixIcon: const Icon(Icons.lock),
-                  prefixIconColor:Theme.of(context).colorScheme.primary,
+                  prefixIconColor: Theme.of(context).colorScheme.primary,
                   suffixIcon: IconButton(
                     icon: Icon(
                       _isObscure ? Icons.visibility : Icons.visibility_off,
@@ -116,7 +115,7 @@ class _LoginPageState extends State<LoginPage> {
                   labelText: 'Password',
                   hintText: 'Enter your password',
                   hintStyle: TextStyle(
-                    color:Theme.of(context).colorScheme.primary,
+                    color: Theme.of(context).colorScheme.primary,
                   ),
                 ),
               ),
@@ -134,21 +133,16 @@ class _LoginPageState extends State<LoginPage> {
                 mainAxisAlignment: MainAxisAlignment.center,
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
-                  const Text(
+                  Text(
                     'Haven’t made an account? ',
-                    style: TextStyle(
-                      fontWeight: FontWeight.w400,
-                      fontSize: 13,
-                    ),
+                    style: AppTextStyles.captionMedium,
                   ),
                   GestureDetector(
                     onTap: () => context.push(RoutesConstants.signup),
-                    child: const Text(
+                    child: Text(
                       'Sign Up',
-                      style: TextStyle(
-                        color: Color(0xFF95ACFF),
-                        fontWeight: FontWeight.w400,
-                        fontSize: 13,
+                      style: AppTextStyles.captionMedium.copyWith(
+                        color: const Color(0xFF95ACFF),
                       ),
                     ),
                   ),
@@ -165,11 +159,11 @@ class _LoginPageState extends State<LoginPage> {
 extension Data on Map<String, TextEditingController> {
   LoginData toLoginData() {
     final map = <String, dynamic>{};
-    
+
     for (MapEntry e in entries) {
       map.putIfAbsent(e.key, () => e.value.text);
     }
-    
+
     return LoginData.fromMap(map);
   }
 }
