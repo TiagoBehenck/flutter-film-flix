@@ -1,8 +1,8 @@
 import 'package:filme_flix/common/styles/text/app_text_styles.dart';
 import 'package:filme_flix/app_config.dart';
 import 'package:filme_flix/core/app/detail/widgets/expanded_app_bar_content/poster_loading.dart';
-import 'package:filme_flix/models/movie.dart';
-import 'package:filme_flix/widgets/outlined_chip/outlined_chip.dart';
+import 'package:filme_flix/common/models/movie.dart';
+import 'package:filme_flix/common/widgets/outlined_chip/outlined_chip.dart';
 import 'package:flutter/material.dart';
 
 class ExpandedAppBarContent extends StatelessWidget {

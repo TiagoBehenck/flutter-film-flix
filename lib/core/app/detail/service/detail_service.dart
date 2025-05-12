@@ -1,5 +1,5 @@
-import 'package:filme_flix/core/http/service/_base/base_service.dart';
-import 'package:filme_flix/models/movie.dart';
+import 'package:filme_flix/common/http/service/_base/base_service.dart';
+import 'package:filme_flix/common/models/movie.dart';
 
 class DetailService {
   late final BaseService _baseService;

@@ -1,5 +1,5 @@
 import 'package:filme_flix/core/app/favorites/service/favorites_service.dart';
-import 'package:filme_flix/models/movie.dart';
+import 'package:filme_flix/common/models/movie.dart';
 
 class FavoritesRepository {
   final FavoritesService _service;

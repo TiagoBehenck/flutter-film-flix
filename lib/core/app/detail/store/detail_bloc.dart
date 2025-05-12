@@ -4,9 +4,9 @@ import 'package:filme_flix/core/app/detail/store/state/detail_state.dart';
 import 'package:filme_flix/core/app/favorites/repository/favorites_repository.dart';
 import 'package:filme_flix/core/app/favorites/service/favorites_service.dart';
 import 'package:filme_flix/core/app/favorites/store/events/favorites_events.dart';
-import 'package:filme_flix/core/app/favorites/store/favorites_bloc.dart';
-import 'package:filme_flix/core/http/service/_base/base_service.dart';
-import 'package:filme_flix/infra/db/storage.dart';
+import 'package:filme_flix/core/app/favorites/store/bloc/favorites_bloc.dart';
+import 'package:filme_flix/common/http/service/_base/base_service.dart';
+import 'package:filme_flix/common/infra/db/storage.dart';
 
 import 'package:flutter_bloc/flutter_bloc.dart';
 

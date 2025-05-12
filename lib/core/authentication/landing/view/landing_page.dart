@@ -1,8 +1,8 @@
 import 'package:filme_flix/common/styles/text/app_text_styles.dart';
 import 'package:filme_flix/common/extensions/build_context_extension.dart';
-import 'package:filme_flix/core/navigation/routes_constants.dart';
-import 'package:filme_flix/widgets/buttons/primary_button.dart';
-import 'package:filme_flix/widgets/buttons/secondary_button.dart';
+import 'package:filme_flix/common/navigation/routes_constants.dart';
+import 'package:filme_flix/common/widgets/buttons/primary_button.dart';
+import 'package:filme_flix/common/widgets/buttons/secondary_button.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 

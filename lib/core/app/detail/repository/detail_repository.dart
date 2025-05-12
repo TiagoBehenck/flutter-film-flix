@@ -1,6 +1,6 @@
 import 'package:filme_flix/core/app/detail/service/detail_service.dart';
-import 'package:filme_flix/core/repository/cached/cached_repository.dart';
-import 'package:filme_flix/models/movie.dart';
+import 'package:filme_flix/common/repository/cached/cached_repository.dart';
+import 'package:filme_flix/common/models/movie.dart';
 
 class DetailRepository extends CachedRepository {
   final DetailService _service;

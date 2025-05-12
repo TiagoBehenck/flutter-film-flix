@@ -1,4 +1,4 @@
-import 'package:filme_flix/models/movie.dart';
+import 'package:filme_flix/common/models/movie.dart';
 
 sealed class FavoritesEvents {}
 

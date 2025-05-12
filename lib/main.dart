@@ -1,6 +1,6 @@
 import 'package:filme_flix/common/styles/theme/custom_theme.dart';
-import 'package:filme_flix/core/navigation/routes.dart';
-import 'package:filme_flix/infra/db/storage.dart';
+import 'package:filme_flix/common/navigation/routes.dart';
+import 'package:filme_flix/common/infra/db/storage.dart';
 import 'package:filme_flix/providers.dart';
 import 'package:flutter/material.dart';
 

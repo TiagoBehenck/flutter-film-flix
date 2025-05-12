@@ -1,10 +1,10 @@
 import 'package:filme_flix/common/styles/text/app_text_styles.dart';
-import 'package:filme_flix/models/movie.dart';
+import 'package:filme_flix/common/models/movie.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
 import 'package:filme_flix/app_config.dart';
-import 'package:filme_flix/core/navigation/routes_constants.dart';
+import 'package:filme_flix/common/navigation/routes_constants.dart';
 
 class FavoritesSuccess extends StatelessWidget {
   const FavoritesSuccess({required this.favoriteMovie, super.key});

@@ -1,5 +1,6 @@
 import 'package:filme_flix/core/app/search/service/search_service.dart';
-import 'package:filme_flix/models/movie.dart';
+import 'package:filme_flix/common/models/movie.dart';
+import 'package:filme_flix/common/models/response.dart';
 
 class SearchRepository {
   late final SearchService _repository;
@@ -8,9 +9,10 @@ class SearchRepository {
     this._repository,
   );
 
-   Future<List<Movie>> searchMovies(String searchTerm) async {
-    const page = 0;
-
-    return _repository.searchMovies(searchTerm: searchTerm, page: page + 1);
+   Future<Response<Movie>> searchMovies({
+      required String searchTerm,
+      required int page,
+    }) async {
+    return _repository.searchMovies(searchTerm: searchTerm, page: page);
   }
 }

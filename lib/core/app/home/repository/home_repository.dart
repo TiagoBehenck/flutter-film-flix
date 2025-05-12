@@ -1,8 +1,8 @@
 import 'dart:async';
 
 import 'package:filme_flix/core/app/home/service/home_service.dart';
-import 'package:filme_flix/core/repository/cached/cached_repository.dart';
-import 'package:filme_flix/models/movie.dart';
+import 'package:filme_flix/common/repository/cached/cached_repository.dart';
+import 'package:filme_flix/common/models/movie.dart';
 
 class HomeRepository extends CachedRepository {
   final HomeService _service;
