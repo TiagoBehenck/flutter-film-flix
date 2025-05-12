@@ -1,3 +1,4 @@
+import 'package:filme_flix/common/styles/text/app_text_styles.dart';
 import 'package:filme_flix/common/extensions/build_context_extension.dart';
 import 'package:filme_flix/core/navigation/routes_constants.dart';
 import 'package:filme_flix/widgets/buttons/primary_button.dart';
@@ -35,20 +36,19 @@ class LandingPage extends StatelessWidget {
               mainAxisSize: MainAxisSize.min,
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
-                const Text(
+                Text(
                   "What movies anytime anywhere",
-                  style: TextStyle(
-                    fontWeight: FontWeight.bold,
-                    fontSize: 20,
-                  ),
+                  style: AppTextStyles.h3,
                 ),
-                const Text(
+                SizedBox(height: context.height * .01),
+                Text(
                   "Explore a vast collection of blockbuster movies, timeless classics and the latest releases.",
-                  style: TextStyle(
+                  textAlign: TextAlign.center,
+                  style:  AppTextStyles.captionMedium.copyWith(
                     fontWeight: FontWeight.w600,
-                    fontSize: 13,
                   ),
                 ),
+                SizedBox(height: context.height * .01),
                 PrimaryButton(
                   onPressed: () => context.push(RoutesConstants.login),
                   text: "Login",

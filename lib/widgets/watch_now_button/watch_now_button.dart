@@ -1,3 +1,4 @@
+import 'package:filme_flix/common/styles/text/app_text_styles.dart';
 import 'package:filme_flix/common/utils/launch_url.dart';
 import 'package:flutter/material.dart';
 
@@ -52,14 +53,10 @@ class WatchNowButton extends StatelessWidget {
             minHeight: 45.0,
           ),
           alignment: Alignment.center,
-          child: const Text(
+          child:  Text(
             'Watch now',
             textAlign: TextAlign.center,
-            style: TextStyle(
-              color: Colors.white,
-              fontSize: 16.0,
-              fontWeight: FontWeight.w700,
-            ),
+            style: AppTextStyles.buttonLarge,
           ),
         ),
       ),

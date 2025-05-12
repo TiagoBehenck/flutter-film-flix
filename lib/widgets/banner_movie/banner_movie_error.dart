@@ -1,3 +1,4 @@
+import 'package:filme_flix/common/styles/text/app_text_styles.dart';
 import 'package:flutter/material.dart';
 
 class BannerMovieError extends StatelessWidget {
@@ -44,9 +45,7 @@ class BannerMovieError extends StatelessWidget {
               Text(
                 'Oops! Unable to load image',
                 textAlign: TextAlign.center,
-                style: TextStyle(
-                  fontSize: 20,
-                  fontWeight: FontWeight.bold,
+                style: AppTextStyles.h1.copyWith(
                   color: Colors.grey[400],
                 ),
               ),
@@ -54,10 +53,7 @@ class BannerMovieError extends StatelessWidget {
               Text(
                 'This could be due to a temporary connection issue or the image may no longer be available.',
                 textAlign: TextAlign.center,
-                style: TextStyle(
-                  fontSize: 14,
-                  color: Colors.grey[600],
-                ),
+                style: AppTextStyles.errorMedium,
               ),
               const SizedBox(height: 24),
               ElevatedButton.icon(

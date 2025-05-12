@@ -9,6 +9,8 @@ class SearchRepository {
   );
 
    Future<List<Movie>> searchMovies(String searchTerm) async {
-    return _repository.searchMovies(searchTerm: searchTerm, page: 1);
+    const page = 0;
+
+    return _repository.searchMovies(searchTerm: searchTerm, page: page + 1);
   }
 }

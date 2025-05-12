@@ -1,3 +1,4 @@
+import 'package:filme_flix/common/styles/text/app_text_styles.dart';
 import 'package:filme_flix/app_config.dart';
 import 'package:filme_flix/models/movie.dart';
 import 'package:flutter/material.dart';
@@ -30,20 +31,13 @@ class MovieList extends StatelessWidget {
           ),
           title: Text(
             movie.title,
-            style: const TextStyle(
-              fontSize: 16,
-              fontWeight: FontWeight.w700,
-            ),
+            style: AppTextStyles.h5,
           ),
           subtitle: Text(
             DateTime.tryParse(movie.releaseDate)?.year.toString() ?? '',
             maxLines: 2,
             overflow: TextOverflow.ellipsis,
-            style: TextStyle(
-              fontSize: 14,
-              fontWeight: FontWeight.w400,
-              color: Colors.grey[400],
-            ),
+            style: AppTextStyles.captionSmall,
           ),
           onTap: onTap,
         ),

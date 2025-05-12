@@ -1,3 +1,4 @@
+import 'package:filme_flix/common/styles/text/app_text_styles.dart';
 import 'package:flutter/material.dart';
 
 class MovieCarrosselEmpty extends StatelessWidget {
@@ -24,7 +25,10 @@ class MovieCarrosselEmpty extends StatelessWidget {
             const SizedBox(height: 8),
             Text(
               message ?? 'No movies found',
-              style: const TextStyle(fontSize: 16, color: Color(0xffBBBBBB)),
+              style:  AppTextStyles.errorMedium.copyWith(
+                fontSize: 20,
+                color: const Color(0xffBBBBBB)
+              ),
               textAlign: TextAlign.center,
               
             ),

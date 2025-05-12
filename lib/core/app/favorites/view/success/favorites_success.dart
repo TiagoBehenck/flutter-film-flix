@@ -1,3 +1,4 @@
+import 'package:filme_flix/common/styles/text/app_text_styles.dart';
 import 'package:filme_flix/models/movie.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
@@ -30,19 +31,11 @@ class FavoritesSuccess extends StatelessWidget {
           ),
           title: Text(
             favorite.title,
-            style: const TextStyle(
-              color: Color(0xffF3F3F3),
-              fontWeight: FontWeight.bold,
-              fontSize: 16,
-            ),
+            style: AppTextStyles.h5,
           ),
           subtitle: Text(
             DateTime.tryParse(favorite.releaseDate)?.year.toString() ?? '',
-            style: const TextStyle(
-              color: Color(0xff969696),
-              fontWeight: FontWeight.w400,
-              fontSize: 14,
-            ),
+            style: AppTextStyles.captionSmall,
           ),
           onTap: () {
             context.push(

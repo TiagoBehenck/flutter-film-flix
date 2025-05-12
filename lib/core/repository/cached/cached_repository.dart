@@ -5,10 +5,16 @@ abstract class CachedRepository {
   final Storage _storage = Storage();
 
   /// Método para obter um objeto único com cache
-  /// [apiCall] - método da API que será chamado caso o cache não exista ou esteja expirado
-  /// [cacheKey] - chave para armazenar/recuperar dados do cache
-  /// [cacheDuration] - duração do cache em minutos (padrão: 30 minutos)
-  /// [forceRefresh] - força atualização do cache, ignorando dados existentes
+  /// - `apiCall`: método da API que será chamado caso o cache não exista ou esteja expirado
+  /// - `cacheKey`: chave para armazenar/recuperar dados do cache
+  /// - `cacheDuration`: duração do cache em minutos (padrão: 30 minutos)
+  /// - `forceRefresh`: força atualização do cache, ignorando dados existentes (padrão: false)
+  ///
+  /// Retorna o objeto do cache ou da API
+  ///
+  /// Se falhar a API e o cache estiver expirado, retorna o cache como fallback
+  ///
+  /// Se não houver cache, propaga o erro
   Future<T> getObjectWithCache<T>({
     required Future<T> Function() apiCall,
     required String cacheKey,

@@ -1,3 +1,4 @@
+import 'package:filme_flix/common/styles/text/app_text_styles.dart';
 import 'package:filme_flix/app_config.dart';
 import 'package:filme_flix/core/app/detail/widgets/expanded_app_bar_content/poster_loading.dart';
 import 'package:filme_flix/models/movie.dart';
@@ -45,24 +46,16 @@ class ExpandedAppBarContent extends StatelessWidget {
           height: 10,
         ),
         Text(
-          textAlign: TextAlign.center,
           movie.title,
-          style: const TextStyle(
-            color: Colors.white,
-            fontSize: 27,
-            fontWeight: FontWeight.bold,
-          ),
+          textAlign: TextAlign.center,
+          style: AppTextStyles.h2,
         ),
         const SizedBox(
           height: 5,
         ),
         Text(
           movie.tagline,
-          style: const TextStyle(
-            color: Colors.white,
-            fontSize: 15,
-            fontWeight: FontWeight.normal,
-          ),
+          style: AppTextStyles.bodyMedium,
         ),
         const SizedBox(
           height: 20,

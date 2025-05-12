@@ -59,15 +59,15 @@ class _HomePageState extends State<HomePage> {
           SliverList(
             delegate: SliverChildListDelegate([
               MovieCarrossel(
-                categoryTitle: 'Discover',
+                titleBold: 'Discover',
                 fetchData: _repository.getMovies,
               ),
               MovieCarrossel(
-                categoryTitle: 'Popular',
+                titleBold: 'Popular',
                 fetchData: _repository.getPopularMovies,
               ),
               MovieCarrossel(
-                categoryTitle: 'Top Rated',
+                titleBold: 'Top Rated',
                 fetchData: _repository.getTopRatedMovies,
               ),
             ]),
