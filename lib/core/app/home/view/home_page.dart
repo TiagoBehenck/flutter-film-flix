@@ -1,9 +1,9 @@
 import 'package:filme_flix/common/extensions/build_context_extension.dart';
 import 'package:filme_flix/core/app/home/repository/home_repository.dart';
 import 'package:filme_flix/core/app/home/service/home_service.dart';
-import 'package:filme_flix/core/http/service/_base/base_service.dart';
-import 'package:filme_flix/widgets/banner_movie/banner_movie.dart';
-import 'package:filme_flix/widgets/movie_carrossel/movie_carrossel.dart';
+import 'package:filme_flix/common/http/service/_base/base_service.dart';
+import 'package:filme_flix/common/widgets/banner_movie/banner_movie.dart';
+import 'package:filme_flix/common/widgets/movie_carrossel/movie_carrossel.dart';
 import 'package:flutter/material.dart';
 
 class HomePage extends StatefulWidget {

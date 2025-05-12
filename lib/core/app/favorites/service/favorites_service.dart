@@ -1,5 +1,5 @@
-import 'package:filme_flix/infra/db/storage.dart';
-import 'package:filme_flix/models/movie.dart';
+import 'package:filme_flix/common/infra/db/storage.dart';
+import 'package:filme_flix/common/models/movie.dart';
 
 class FavoritesService {
   final Storage _storage;

@@ -1,6 +1,6 @@
 import 'package:filme_flix/common/styles/text/app_text_styles.dart';
 import 'package:filme_flix/app_config.dart';
-import 'package:filme_flix/models/movie.dart';
+import 'package:filme_flix/common/models/movie.dart';
 import 'package:flutter/material.dart';
 
 class CollapsedAppBarContent extends StatelessWidget {

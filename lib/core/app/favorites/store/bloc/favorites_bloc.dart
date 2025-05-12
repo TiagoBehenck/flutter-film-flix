@@ -1,6 +1,6 @@
 import 'package:filme_flix/core/app/favorites/repository/favorites_repository.dart';
 import 'package:filme_flix/core/app/favorites/service/favorites_service.dart';
-import 'package:filme_flix/infra/db/storage.dart';
+import 'package:filme_flix/common/infra/db/storage.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import 'package:filme_flix/core/app/favorites/store/events/favorites_events.dart';

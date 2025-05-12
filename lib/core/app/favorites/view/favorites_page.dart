@@ -3,7 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter/material.dart';
 
 import 'package:filme_flix/core/app/favorites/store/events/favorites_events.dart';
-import 'package:filme_flix/core/app/favorites/store/favorites_bloc.dart';
+import 'package:filme_flix/core/app/favorites/store/bloc/favorites_bloc.dart';
 import 'package:filme_flix/core/app/favorites/store/state/favorites_state.dart';
 
 import 'package:filme_flix/core/app/favorites/view/success/favorites_success.dart';

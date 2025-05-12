@@ -1,7 +1,7 @@
 import 'dart:async';
 
-import 'package:filme_flix/core/http/service/_base/base_service.dart';
-import 'package:filme_flix/models/movie.dart';
+import 'package:filme_flix/common/http/service/_base/base_service.dart';
+import 'package:filme_flix/common/models/movie.dart';
 
 class HomeService {
   late final BaseService _baseService;
