@@ -1,13 +1,15 @@
-import 'package:filme_flix/common/styles/text/app_text_styles.dart';
-import 'package:filme_flix/core/app/search/repository/search_repository.dart';
-import 'package:filme_flix/core/app/search/service/search_service.dart';
-import 'package:filme_flix/core/http/service/_base/base_service.dart';
-import 'package:filme_flix/core/navigation/routes_constants.dart';
-import 'package:filme_flix/models/movie.dart';
-import 'package:filme_flix/widgets/movie_list/movie_list.dart';
-import 'package:filme_flix/widgets/search_input/search_input.dart';
 import 'package:flutter/material.dart';
-import 'package:go_router/go_router.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+
+import 'package:filme_flix/common/styles/text/app_text_styles.dart';
+import 'package:filme_flix/core/app/search/store/events/search_events.dart';
+import 'package:filme_flix/core/app/search/store/bloc/search_bloc.dart';
+import 'package:filme_flix/core/app/search/store/state/search_state.dart';
+import 'package:filme_flix/common/widgets/search_input/search_input.dart';
+
+import 'package:filme_flix/core/app/search/view/loading/search_loading.dart';
+import 'package:filme_flix/core/app/search/view/success/search_success.dart';
+import 'package:filme_flix/core/app/search/view/error/search_error.dart';
 
 class SearchPage extends StatefulWidget {
   const SearchPage({super.key});
@@ -17,34 +19,21 @@ class SearchPage extends StatefulWidget {
 }
 
 class _SearchPageState extends State<SearchPage> {
-  late final SearchRepository _repository;
-  late final SearchService _service;
-  late final ScrollController _scrollController = ScrollController();
-  final TextEditingController searchController = TextEditingController();
-  final ValueNotifier<List<Movie>> searchResults = ValueNotifier([]);
-
-  Future<void> fetchMovies(String query) async {
-    final List<Movie> fetchedMovies = await _repository.searchMovies(query);
-    searchResults.value = [...searchResults.value, ...fetchedMovies];
-  }
+  late final TextEditingController searchController;
+  late final SearchBloc _bloc;
 
   @override
   void initState() {
     super.initState();
-    _service = SearchService(BaseService());
-    _repository = SearchRepository(
-      _service,
-    );
-    _scrollController.addListener(_onScroll);
+    _bloc = context.read<SearchBloc>();
+    searchController = TextEditingController();
   }
 
-  void _onScroll() async {
-    final screenEndReached = _scrollController.position.pixels >=
-        _scrollController.position.maxScrollExtent - 300;
-
-    if (screenEndReached) {
-      await fetchMovies(searchController.text);
-    }
+  @override
+  void dispose() {
+    _bloc.add(SearchInitial());
+    searchController.dispose();
+    super.dispose();
   }
 
   @override
@@ -64,35 +53,30 @@ class _SearchPageState extends State<SearchPage> {
             SearchInput(
               controller: searchController,
               onChanged: (value) {
-                if (value.isNotEmpty) {
-                  fetchMovies(value);
-                } else {
-                  searchResults.value = [];
-                }
+                _bloc.add(GetSearch(searchText: value));
               },
             ),
             Expanded(
               child: Padding(
                 padding: const EdgeInsets.only(top: 16),
-                child: ValueListenableBuilder<List<Movie>>(
-                  valueListenable: searchResults,
-                  builder: (context, movies, _) {
-                    return ListView.builder(
-                      controller: _scrollController,
-                      itemCount: movies.length,
-                      itemBuilder: (context, index) {
-                        final movie = movies[index];
-                        return MovieList(
-                          movie: movie,
-                          onTap: () {
-                            context.push(
-                              RoutesConstants.detail,
-                              extra: movies[index],
-                            );
-                          },
-                        );
-                      },
-                    );
+                child: BlocBuilder<SearchBloc, SearchState>(
+                  bloc: _bloc,
+                  builder: (context, state) {
+                    return switch (state) {
+                      SearchStateInitial() => const SizedBox.shrink(),
+                      SearchStateLoading() => const SearchLoading(),
+                      SearchStateSuccess() => SearchSuccess(
+                          movies: state.searchResults,
+                          onLoadMore: () => _bloc.add(
+                            GetSearch(
+                              searchText: searchController.text,
+                            ),
+                          ),
+                        ),
+                      SearchStateError() => SearchError(
+                          onRetry: () => _bloc.add(
+                              GetSearch(searchText: searchController.text))),
+                    };
                   },
                 ),
               ),

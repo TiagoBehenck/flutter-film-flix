@@ -1,16 +1,18 @@
 import 'dart:async';
 
-import 'package:filme_flix/core/http/service/_base/base_service.dart';
-import 'package:filme_flix/models/movie.dart';
+import 'package:filme_flix/core/app/search/model/search_response.dart';
+import 'package:filme_flix/common/http/service/_base/base_service.dart';
+import 'package:filme_flix/common/models/movie.dart';
+import 'package:filme_flix/common/models/response.dart';
 
 class SearchService {
   late final BaseService _baseService;
 
   SearchService(this._baseService);
 
-  Future<List<Movie>> searchMovies({
-    String searchTerm = '',
-    int page = 1,
+  Future<Response<Movie>> searchMovies({
+    required  searchTerm,
+    required int page,
   }) async {
     try {
       final response =
@@ -20,8 +22,13 @@ class SearchService {
       });
 
       if (response.statusCode == 200) {
-        final List<dynamic> data = response.data['results'];
-        return data.map((json) => Movie.fromJson(json)).toList();
+        final searchResponse = SearchResponse.fromJson(response.data);
+        return Response<Movie>(
+          results: searchResponse.results,
+          page: searchResponse.page,
+          totalPages: searchResponse.totalPages,
+          totalResults: searchResponse.totalResults,
+        );
       } else {
         throw Exception('Failed to load movies');
       }
