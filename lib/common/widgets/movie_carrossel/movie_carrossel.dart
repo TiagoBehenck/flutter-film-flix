@@ -1,22 +1,48 @@
-import 'package:filme_flix/common/navigation/routes_constants.dart';
-import 'package:go_router/go_router.dart';
 import 'package:flutter/material.dart';
-import 'package:filme_flix/common/widgets/movie_card/movie_card.dart';
-import 'package:filme_flix/common/widgets/movie_carrossel/movie_carrossel_empty.dart';
-import 'package:filme_flix/common/widgets/movie_carrossel/movie_carrossel_error.dart';
-import 'package:filme_flix/common/widgets/movie_carrossel/movie_carrossel_loading.dart';
-import 'package:filme_flix/common/styles/text/app_text_styles.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
-class MovieCarrossel extends StatelessWidget {
+import 'package:filme_flix/core/app/home/enum/movies_categories.dart';
+import 'package:filme_flix/core/app/home/store/bloc/home_bloc.dart';
+import 'package:filme_flix/core/app/home/store/events/home_events.dart';
+import 'package:filme_flix/core/app/home/store/state/home_state.dart';
+
+import 'package:filme_flix/common/styles/text/app_text_styles.dart';
+import 'package:filme_flix/common/widgets/movie_carrossel/empty/movie_carrossel_empty.dart';
+import 'package:filme_flix/common/widgets/movie_carrossel/loading/movie_carrossel_loading.dart';
+import 'package:filme_flix/common/widgets/movie_carrossel/success/movie_carrossel_success.dart';
+import 'package:filme_flix/common/widgets/movie_carrossel/error/movie_carrossel_error.dart';
+
+class MovieCarrossel extends StatefulWidget {
   const MovieCarrossel({
-    required this.titleBold,
-    required this.fetchData,
+    required this.movieCategory,
     super.key,
   });
 
-  final String titleBold;
-  final Future<List<dynamic>> Function() fetchData;
-  
+  final MoviesCategories movieCategory;
+
+  @override
+  State<MovieCarrossel> createState() => _MovieCarrosselState();
+}
+
+class _MovieCarrosselState extends State<MovieCarrossel> {
+  late HomeBloc _bloc;
+
+  @override
+  void initState() {
+    super.initState();
+    _bloc = context.read<HomeBloc>();
+
+    _bloc.add(GetMovies(
+      category: widget.movieCategory,
+    ));
+  }
+
+  @override
+  void dispose() {
+    _bloc.close();
+    super.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -28,44 +54,29 @@ class MovieCarrossel extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Text(
-            titleBold,
+            widget.movieCategory.title,
             style: AppTextStyles.h3,
           ),
           const SizedBox(height: 8),
-          FutureBuilder(
-              future: fetchData(),
-              builder: (ctx, snapshot) {
-                if (snapshot.connectionState == ConnectionState.waiting) {
-                  return const MovieCarrosselLoading();
-                }
-                if (snapshot.hasError) {
-                  return MovieCarrosselError(onRetry: () => fetchData());
-                }
-                if (!snapshot.hasData || snapshot.data!.isEmpty) {
-                  return const MovieCarrosselEmpty();
-                }
-
-                final movies = snapshot.data ?? [];                
-
-                return SizedBox(
-                  height: 200,
-                  child: ListView.builder(
-                    scrollDirection: Axis.horizontal,
-                    itemCount: snapshot.data!.length,
-                    itemBuilder: (context, index) {
-                      return MovieCard(
-                        movie: movies[index],
-                        onTap: (){
-                         context.push(
-                            RoutesConstants.detail,
-                            extra: movies[index],
-                          );
-                        },
-                      );
+          BlocBuilder<HomeBloc, HomeState>(
+            bloc: _bloc,
+            builder: (context, state) {
+              return switch (state) {
+                HomeStateInitial() => const MovieCarrosselEmpty(),
+                HomeStateLoading() => const MovieCarrosselLoading(),
+                HomeStateError() => MovieCarrosselError(
+                    onRetry: () {
+                      _bloc.add(GetMovies(
+                        category: widget.movieCategory,
+                      ));
                     },
                   ),
-                );
-              })
+                HomeStateSuccess() => MovieCarrosselSuccess(
+                  movies: state.movies
+                ),
+              };
+            },
+          ),
         ],
       ),
     );

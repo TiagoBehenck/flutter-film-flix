@@ -14,27 +14,15 @@ class HomeRepository extends CachedRepository {
     this._service,
   );
   
-  Future<List<Movie>> getMovies() async {
-    return getListWithCache<Movie>(
-      apiCall: () =>  _service.getMovies(),
+  Future<List<Movie>> getMoviesByCategory({
+    required String endpointPath,
+    int page = 1,
+  }) async {
+    return await getListWithCache<Movie>(
+      apiCall: () =>  _service.getMoviesByCategory(endpointPath: endpointPath, page: page),
       cacheKey: _moviesKey,
       cacheDuration: 60,
-    );
-  }
-
-  Future<List<Movie>> getTopRatedMovies() async {
-    return getListWithCache<Movie>(
-      apiCall: () =>  _service.getTopRatedMovies(),
-      cacheKey: _moviesTopRatedKey,
-      cacheDuration: 60,
-    );
-  }
-
-  Future<List<Movie>> getPopularMovies() async {
-    return getListWithCache<Movie>(
-      apiCall: () =>  _service.getPopularMovies(),
-      cacheKey: _moviesPopularKey,
-      cacheDuration: 60,
+      forceRefresh: true,
     );
   }
 

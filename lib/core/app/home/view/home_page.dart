@@ -1,9 +1,7 @@
 import 'package:filme_flix/common/extensions/build_context_extension.dart';
-import 'package:filme_flix/core/app/home/repository/home_repository.dart';
-import 'package:filme_flix/core/app/home/service/home_service.dart';
-import 'package:filme_flix/common/http/service/_base/base_service.dart';
 import 'package:filme_flix/common/widgets/banner_movie/banner_movie.dart';
 import 'package:filme_flix/common/widgets/movie_carrossel/movie_carrossel.dart';
+import 'package:filme_flix/core/app/home/enum/movies_categories.dart';
 import 'package:flutter/material.dart';
 
 class HomePage extends StatefulWidget {
@@ -14,16 +12,9 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-  late final HomeRepository _repository;
-  late final HomeService _service;
-
   @override
   void initState() {
     super.initState();
-    _service = HomeService(BaseService());
-    _repository = HomeRepository(
-      _service,
-    );
   }
 
   @override
@@ -58,17 +49,17 @@ class _HomePageState extends State<HomePage> {
           ),
           SliverList(
             delegate: SliverChildListDelegate([
-              MovieCarrossel(
-                titleBold: 'Discover',
-                fetchData: _repository.getMovies,
+              const MovieCarrossel(
+                movieCategory: MoviesCategories.popular,
               ),
-              MovieCarrossel(
-                titleBold: 'Popular',
-                fetchData: _repository.getPopularMovies,
+              const MovieCarrossel(
+                movieCategory: MoviesCategories.inTheaters
               ),
-              MovieCarrossel(
-                titleBold: 'Top Rated',
-                fetchData: _repository.getTopRatedMovies,
+              const MovieCarrossel(
+                movieCategory: MoviesCategories.topRated
+              ),
+              const MovieCarrossel(
+                movieCategory: MoviesCategories.discover
               ),
             ]),
           ),

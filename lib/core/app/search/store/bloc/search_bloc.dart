@@ -15,6 +15,11 @@ class SearchBloc extends Bloc<SearchEvents, SearchState> {
 
   Future<void> _loadMoreResults(
       String searchTerm, Emitter<SearchState> emit) async {
+
+    if (state is SearchStateLoading) {
+      return;
+    }
+    
     final currentState = state as SearchStateSuccess;
 
     if (currentState.page >= currentState.totalPages) {

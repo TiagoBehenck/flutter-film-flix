@@ -2,6 +2,7 @@ import 'package:filme_flix/common/styles/text/app_text_styles.dart';
 import 'package:filme_flix/core/app/detail/store/detail_bloc.dart';
 import 'package:filme_flix/core/app/detail/store/events/detail_events.dart';
 import 'package:filme_flix/core/app/detail/store/state/detail_state.dart';
+import 'package:filme_flix/core/app/favorites/repository/favorites_repository.dart';
 import 'package:filme_flix/core/app/favorites/store/bloc/favorites_bloc.dart';
 import 'package:filme_flix/common/models/movie.dart';
 import 'package:filme_flix/common/widgets/favorite_button/favorite_button.dart';
@@ -31,7 +32,7 @@ class _Content extends State<Content> {
     super.initState();
 
     _favoritesBloc = context.read<FavoritesBloc>();
-    _detailsBloc = DetailBloc(favoritesBloc: _favoritesBloc);
+    _detailsBloc = DetailBloc(_favoritesBloc, context.read<FavoritesRepository>());
     _detailsBloc.add(GetIsFavoriteMovie(movie: movie));
   }
 

@@ -1,26 +1,19 @@
-import 'package:filme_flix/core/app/detail/service/detail_service.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+
 import 'package:filme_flix/core/app/detail/store/events/detail_events.dart';
 import 'package:filme_flix/core/app/detail/store/state/detail_state.dart';
 import 'package:filme_flix/core/app/favorites/repository/favorites_repository.dart';
-import 'package:filme_flix/core/app/favorites/service/favorites_service.dart';
 import 'package:filme_flix/core/app/favorites/store/events/favorites_events.dart';
 import 'package:filme_flix/core/app/favorites/store/bloc/favorites_bloc.dart';
-import 'package:filme_flix/common/http/service/_base/base_service.dart';
-import 'package:filme_flix/common/infra/db/storage.dart';
-
-import 'package:flutter_bloc/flutter_bloc.dart';
 
 class DetailBloc extends Bloc<DetailEvents, DetailState> {
-  final DetailService _service;
   late final FavoritesRepository _repository;
   final FavoritesBloc favoritesBloc;
-  
-  DetailBloc({
-     required this.favoritesBloc,
-  })
-      : _service = DetailService(BaseService()),
-        super(DetailStateStateInitial()) {
-    _repository = FavoritesRepository(FavoritesService(Storage()));
+
+  DetailBloc(
+    this.favoritesBloc,
+    this._repository,
+  ) : super(DetailStateStateInitial()) {
     on<GetIsFavoriteMovie>(_getIsFavoriteMovie);
     on<ToggleFavoriteMovie>(_toggleFavoriteMovie);
   }
@@ -51,8 +44,9 @@ class DetailBloc extends Bloc<DetailEvents, DetailState> {
       }
 
       emit(DetailStateStateSuccess(
-          isFavoriteMovie: !successState.isFavoriteMovie,));
-      
+        isFavoriteMovie: !successState.isFavoriteMovie,
+      ));
+
       favoritesBloc.add(GetFavorites());
     }
   }
