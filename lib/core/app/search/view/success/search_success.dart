@@ -1,5 +1,3 @@
-import 'dart:async';
-
 import 'package:filme_flix/common/models/movie.dart';
 import 'package:filme_flix/common/utils/debounce.dart';
 import 'package:filme_flix/common/widgets/movie_list/movie_list.dart';
