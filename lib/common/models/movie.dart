@@ -92,6 +92,7 @@ class Movie extends JsonSerializable<Movie> {
     );
   }
 
+  @override
   Map<String, dynamic> toMap() {
     return {
       'adult': adult,
