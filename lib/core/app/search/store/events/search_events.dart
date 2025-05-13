@@ -1,10 +1,10 @@
 sealed class SearchEvents {}
 
 class GetSearch extends SearchEvents {
-  final String searchText;
+  final String searchTerm;
 
   GetSearch({
-    required this.searchText,
+    required this.searchTerm,
   });
 }
 

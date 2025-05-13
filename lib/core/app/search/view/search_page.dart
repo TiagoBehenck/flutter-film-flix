@@ -53,7 +53,7 @@ class _SearchPageState extends State<SearchPage> {
             SearchInput(
               controller: searchController,
               onChanged: (value) {
-                _bloc.add(GetSearch(searchText: value));
+                _bloc.add(GetSearch(searchTerm: value));
               },
             ),
             Expanded(
@@ -69,13 +69,13 @@ class _SearchPageState extends State<SearchPage> {
                           movies: state.searchResults,
                           onLoadMore: () => _bloc.add(
                             GetSearch(
-                              searchText: searchController.text,
+                              searchTerm: searchController.text,
                             ),
                           ),
                         ),
                       SearchStateError() => SearchError(
                           onRetry: () => _bloc.add(
-                              GetSearch(searchText: searchController.text))),
+                              GetSearch(searchTerm: searchController.text))),
                     };
                   },
                 ),
