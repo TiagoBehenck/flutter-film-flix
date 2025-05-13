@@ -32,6 +32,11 @@ class MovieList extends StatelessWidget {
                 : const SizedBox(
                     width: 60,
                     height: 80,
+                    child: Icon(
+                      Icons.broken_image,
+                      size: 40,
+                      color: Colors.grey,
+                    ),
                   ),
           ),
           title: Text(
