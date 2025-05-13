@@ -1,5 +1,4 @@
 import 'dart:async';
-import 'package:filme_flix/common/utils/debounce.dart';
 import 'package:flutter/material.dart';
 
 class SearchInput extends StatefulWidget {
@@ -22,6 +21,11 @@ class _SearchInputState extends State<SearchInput> {
   void _onSearchChanged(String query) {
     if (_debounce?.isActive ?? false) _debounce!.cancel();
     _debounce = Timer(const Duration(milliseconds: 300), () {
+      
+      if (query.isEmpty) {
+        widget.onChanged('');
+      }
+      
       if (query.length >= 3) {
         widget.onChanged(query);
       }
