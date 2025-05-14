@@ -1,0 +1,40 @@
+// Flutter imports:
+import 'package:flutter/material.dart';
+
+// Project imports:
+import 'package:filme_flix/app/common/styles/text/app_text_styles.dart';
+
+class MovieCardError extends StatelessWidget {
+  const MovieCardError({
+    super.key,
+    required this.onRetry,
+  });
+
+  final VoidCallback onRetry;
+
+  @override
+  Widget build(BuildContext context) {
+    return Center(
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          const Icon(
+            Icons.error,
+            color: Colors.redAccent,
+            size: 48.0,
+          ),
+          const SizedBox(height: 16.0),
+          Text(
+            'Something went wrong!',
+            style: AppTextStyles.errorMedium,
+          ),
+          const SizedBox(height: 16.0),
+          ElevatedButton(
+            onPressed: onRetry,
+            child: const Text('Retry'),
+          ),
+        ],
+      ),
+    );
+  }
+}
