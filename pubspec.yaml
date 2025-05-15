@@ -18,11 +18,14 @@ dependencies:
   shared_preferences: ^2.5.3
   url_launcher: ^6.3.1
   flutter_bloc: ^9.1.1
+  get_it: ^8.0.3
+  
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
   flutter_lints: ^4.0.0
+  import_sorter: ^4.6.0
 
 flutter:
   uses-material-design: true

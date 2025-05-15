@@ -1,13 +1,17 @@
-import 'package:filme_flix/common/styles/theme/custom_theme.dart';
-import 'package:filme_flix/common/navigation/routes.dart';
-import 'package:filme_flix/common/infra/db/storage.dart';
-import 'package:filme_flix/providers.dart';
+// Flutter imports:
 import 'package:flutter/material.dart';
 
+// Project imports:
+import 'package:filme_flix/app/common/infra/db/storage.dart';
+import 'package:filme_flix/app/common/providers/providers.dart';
+import 'package:filme_flix/app/common/styles/theme/custom_theme.dart';
+import 'package:filme_flix/app/core/di/service_locator.dart';
+import 'package:filme_flix/app/core/navigation/routes.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Storage.init();
+  await configureDependencies();
   runApp(
     providers(
       child: const MyApp(),
